@@ -1,5 +1,6 @@
 import "package:flutter/material.dart" ;
 import "package:get/get.dart";
+import "package:myegypt/constant.dart";
 import "features/home/presentation/view/home_view.dart";
 
 
@@ -18,9 +19,10 @@ class MyEgypt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return  const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeView(),
+
     );
   }
 }

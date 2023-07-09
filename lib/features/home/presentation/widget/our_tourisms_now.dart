@@ -7,6 +7,8 @@ class InEgyptNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
+        itemCount: 11,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
@@ -15,7 +17,8 @@ class InEgyptNow extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               child: Image.network(
                 "https://dreamfiancee.com/wp-content/uploads/2023/04/russian-mail-order-bride.jpg",
-                width: dimWidth(context) * .3,
+                width: dimWidth(context) * .26,
+                fit: BoxFit.fill,
               ),
             ),
           );

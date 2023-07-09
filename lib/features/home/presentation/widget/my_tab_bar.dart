@@ -1,7 +1,10 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
+import 'package:myegypt/features/home/presentation/view/hotel_view.dart';
 import 'package:myegypt/features/home/presentation/widget/place_view.dart';
+
+import '../view/tour_guide.dart';
 
 class MyButtonTabBar extends StatelessWidget {
   const MyButtonTabBar({Key? key}) : super(key: key);
@@ -31,13 +34,14 @@ class MyButtonTabBar extends StatelessWidget {
                 Tab(icon: Icon(Icons.tour), text: "Tour guide"),
               ]),
            /// tabs view
-          const Expanded(
-            child: TabBarView(children: [
-              PlacesView(),
-              Text("hi"),
-              Text("hi"),
-              Text("hi"),
-            ]),
+            const Expanded(
+            child: TabBarView(
+                children: [
+                  PlacesView(),
+                  HotelView() ,
+                  Text("hi"),
+                  TourGuide(),
+                ]),
           ),
         ],
       ),
