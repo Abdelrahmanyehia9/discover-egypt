@@ -3,34 +3,39 @@ import 'package:flutter/material.dart';
 
 import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
+import '../../data/model/tour_package.dart';
 
 class TourGuidePackage extends StatelessWidget {
-  const TourGuidePackage({Key? key}) : super(key: key);
-
+  const TourGuidePackage({Key? key, required this.p}) : super(key: key);
+final  TourGuidePackageModel p ;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       horizontalTitleGap: 15,
       minVerticalPadding: 0,
       leading: Image.network(
-        "https://www.weseektravel.com/wp-content/uploads/2022/05/landmarks-in-egypt-1-2.jpg",
+
+        p.images.first ,
+        fit: BoxFit.fill,
+        width: 80,
+        height: 100,
       ),
-      title: const CustomText(
-        text: "Pyramids Trip",
+      title:  CustomText(
+        text: p.tittle,
         fontWeight: FontWeight.bold,
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
+           SizedBox(
               height: 30,
               child: CustomText(
                 text:
-                "lets see pyramids and Sphinks wint great jkff fhdjsfhd fdjfhjfd",
+                p.subTittle,
                 fontWeight: FontWeight.w100,
               )),
           CustomText(
-            text: "120 \$",
+            text: "${p.price} \$",
             color: mainColor,
           )
         ],

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/dim.dart';
+import '../../data/model/place_model.dart';
 
 class InEgyptNow extends StatelessWidget {
-  const InEgyptNow({Key? key}) : super(key: key);
-
+  const InEgyptNow({Key? key, required this.model}) : super(key: key);
+final List<PlaceModel> model ;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: EdgeInsets.zero,
-        itemCount: 11,
+        itemCount: (model.length).ceil(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
@@ -16,9 +17,9 @@ class InEgyptNow extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.network(
-                "https://dreamfiancee.com/wp-content/uploads/2023/04/russian-mail-order-bride.jpg",
-                width: dimWidth(context) * .26,
-                fit: BoxFit.fill,
+                model[index].image,
+                width: dimWidth(context) * .22,
+                fit: BoxFit.cover,
               ),
             ),
           );

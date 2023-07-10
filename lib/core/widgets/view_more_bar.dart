@@ -4,10 +4,11 @@ import 'package:myegypt/constant.dart';
 import 'custom_text.dart';
 
 class ViewMoreBar extends StatelessWidget {
-  const ViewMoreBar({Key? key, required this.text, this.size, this.weight}) : super(key: key);
+  const ViewMoreBar({Key? key,this.onTap ,  required this.text, this.size, this.weight}) : super(key: key);
   final String text  ;
   final double? size ;
   final FontWeight? weight ;
+  final VoidCallback? onTap  ;
   @override
   Widget build(BuildContext context) {
     return  Row(
@@ -18,11 +19,13 @@ class ViewMoreBar extends StatelessWidget {
           size: size ?? 18,
           fontWeight: weight?? FontWeight.w800 ,
         ),
-        CustomText(
-          fontWeight: FontWeight.w300,
-          size: 18,
-          text: "view all",
-          color: mainColor,
+        InkWell(onTap: onTap ,
+          child: CustomText(
+            fontWeight: FontWeight.w300,
+            size: 18,
+            text: "view all",
+            color: mainColor,
+          ),
         ),
 
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
 import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../widgets/information_row.dart';
@@ -7,8 +8,8 @@ import '../widgets/score_column_tour_guide.dart';
 import '../widgets/tour_guied_package.dart';
 
 class TourGuideDetailsBody extends StatelessWidget {
-  const TourGuideDetailsBody({Key? key}) : super(key: key);
-
+  const TourGuideDetailsBody({Key? key, required this.model}) : super(key: key);
+final TourGuideModel model   ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,37 +21,38 @@ class TourGuideDetailsBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /// profile and name of guide
-              const ProfilePicOfGuide(),
+               ProfilePicOfGuide(model: model,),
               /// likes and trips
               Padding(
                 padding: const EdgeInsets.only(top: 24.0),
                 child: Row(
-                  children: const [
-                    ScoreColumn(num: "104", text: "likes"),
-                    SizedBox(
+                  children:  [
+                    ScoreColumn(num: model.liked.toString(), text: "likes"),
+                    const SizedBox(
                       width: 12,
                     ),
-                    ScoreColumn(num: "44", text: "Trips")
+                    ScoreColumn(num: model.trips.toString(), text: "Trips")
                   ],
                 ),
               )
             ],
           ),
           /// information of tour guide
-          const InformationRow(
-            text: "0123456789",
+           InformationRow(
+            text: model.phoneNumber.toString(),
             icon: Icons.call,
           ),
-          const InformationRow(
-            text: "MohamedAli@yahoo.com",
+           InformationRow(
+            text: model.email,
             icon: Icons.email,
           ),
           /// packaged
           Expanded(
             child: ListView.builder(
-                itemBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: TourGuidePackage(),
+              itemCount: model.packages.length,
+                itemBuilder: (context, index) =>  Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: TourGuidePackage(p: model.packages[index],),
                 )),
           ),
           const SizedBox(

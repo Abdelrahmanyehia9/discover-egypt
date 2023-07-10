@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
 import 'package:myegypt/features/Guide/presentation/view/tour_guide_details_body.dart';
 
 
 class TourGuideDetails extends StatelessWidget {
-  const TourGuideDetails({Key? key}) : super(key: key);
-
+  const TourGuideDetails({Key? key, required this.mode,}) : super(key: key);
+  final TourGuideModel mode ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class TourGuideDetails extends StatelessWidget {
           ),
         ],
       ),
-      body: const TourGuideDetailsBody(),
+      body:  TourGuideDetailsBody(model: mode),
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/dim.dart';
+import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
 
 import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
 
 class ProfilePicOfGuide extends StatelessWidget {
-  const ProfilePicOfGuide({Key? key}) : super(key: key);
-
+  const ProfilePicOfGuide({Key? key, required this.model, }) : super(key: key);
+final TourGuideModel model ;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,7 +22,7 @@ class ProfilePicOfGuide extends StatelessWidget {
             height: dimHeight(context) * 0.22,
             width: dimWidth(context) * 0.35,
             child: Image.network(
-              "https://www.turkishdrama.com/wp-content/uploads/2013/11/burak-ozcivit-actor-16.jpg",
+              model.imagePath,
               fit: BoxFit.fill,
             ),
           ),
@@ -37,8 +38,8 @@ class ProfilePicOfGuide extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16)),
             width: dimWidth(context) * 0.24,
             height: dimHeight(context) * 0.04,
-            child: const CustomText(
-              text: "Mohamed",
+            child:  CustomText(
+              text: model.name.contains(" ") ? model.name.substring(0,model.name.indexOf(" ")):model.name,
               size: 10,
               color: Colors.white,
               fontWeight: FontWeight.bold,

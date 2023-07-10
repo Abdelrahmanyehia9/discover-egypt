@@ -3,9 +3,11 @@ import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/custom_text.dart';
 
-class HotelItem extends StatelessWidget {
-  const HotelItem({Key? key}) : super(key: key);
+import '../../data/model/hotel_model.dart';
 
+class HotelItem extends StatelessWidget {
+  const HotelItem({Key? key, required this.model}) : super(key: key);
+final HotelModel model ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +31,7 @@ class HotelItem extends StatelessWidget {
                 width: dimWidth(context) * 0.55,
                 height: dimHeight(context) * 0.265,
                 child: Image.network(
-                  "https://www.planetware.com/wpimages/2020/03/egypt-best-resorts-marriott-mena-house-hotel.jpg",
+                   model.imagePath ,
                   fit: BoxFit.fill,
                 )),
           ),
@@ -42,13 +44,13 @@ class HotelItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomText(
-                    text: "Marriott Mena House",
+                   CustomText(
+                    text: model.name,
                     fontWeight: FontWeight.w400,
                     size: 16,
                   ),
                   CustomText(
-                    text: "\t haram , Giza",
+                    text: model.location,
                     fontWeight: FontWeight.normal,
                     size: 12,
                     color: Colors.grey.shade800,

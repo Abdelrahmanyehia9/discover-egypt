@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/dim.dart';
+import 'package:myegypt/features/Egypt/data/model/place_model.dart';
 
 class MyImageContainer extends StatelessWidget {
-  const MyImageContainer({Key? key}) : super(key: key);
-
+  const MyImageContainer({Key? key, required this.model}) : super(key: key);
+final PlaceModel model ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -11,7 +12,7 @@ class MyImageContainer extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.network(
-          "https://www.weseektravel.com/wp-content/uploads/2022/05/landmarks-in-egypt-1-2.jpg",
+          model.image,
           fit: BoxFit.fill,
           width: dimWidth(context) * 0.6,
           height: dimHeight(context) * 0.25,
