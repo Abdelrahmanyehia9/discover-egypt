@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import '../../../../core/widgets/view_more_bar.dart';
-import 'img_item.dart';
-import 'our_tourisms_now.dart';
+import '../widgets/img_item.dart';
+import '../widgets/our_tourisms_now.dart';
 
 class PlacesView extends StatelessWidget {
   const PlacesView({Key? key}) : super(key: key);

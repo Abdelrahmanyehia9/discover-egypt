@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
  import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/view_more_bar.dart';
-import 'package:myegypt/features/home/presentation/widget/hotel_item.dart';
-import '../widget/recommended_hotel.dart';
+import 'package:myegypt/features/Hotels/presentation/widgets/hotel_item.dart';
+import '../widgets/recommended_hotel.dart';
 
 class HotelView extends StatelessWidget {
   const HotelView({Key? key}) : super(key: key);

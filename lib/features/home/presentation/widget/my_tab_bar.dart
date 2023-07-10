@@ -1,10 +1,10 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
-import 'package:myegypt/features/home/presentation/view/hotel_view.dart';
-import 'package:myegypt/features/home/presentation/widget/place_view.dart';
+import 'package:myegypt/features/Hotels/presentation/view/hotel_view.dart';
+import 'package:myegypt/features/Egypt/presentation/view/place_view.dart';
 
-import '../view/tour_guide.dart';
+import '../../../Guide/presentation/view/tour_guide.dart';
 
 class MyButtonTabBar extends StatelessWidget {
   const MyButtonTabBar({Key? key}) : super(key: key);
@@ -28,9 +28,7 @@ class MyButtonTabBar extends StatelessWidget {
               tabs: const [
                 Tab(icon: Icon(Icons.place), text: "Place"),
                 Tab(icon: Icon(Icons.hotel), text: "Hotel"),
-                Tab(
-                    icon: Icon(Icons.emoji_transportation),
-                    text: "Transportation"),
+                Tab(icon: Icon(Icons.emoji_transportation), text: "Transportation"),
                 Tab(icon: Icon(Icons.tour), text: "Tour guide"),
               ]),
            /// tabs view
@@ -39,7 +37,7 @@ class MyButtonTabBar extends StatelessWidget {
                 children: [
                   PlacesView(),
                   HotelView() ,
-                  Text("hi"),
+                  Center(child: Text("Not Available yet ")),
                   TourGuide(),
                 ]),
           ),
