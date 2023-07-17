@@ -25,6 +25,7 @@ class PlacesView extends StatelessWidget {
              Get.to(()=>const DiscoverALlEgypt()) ;
            },
                child: ViewMoreBar(text: "${controller.places.length} Places")) ,
+           ViewMoreBar(text: "${controller.places.length} Places") ,
           const SizedBox(
             height: 18,
           ),
@@ -40,9 +41,11 @@ class PlacesView extends StatelessWidget {
             const Padding(
             padding: EdgeInsets.only(bottom: 16.0, top: 8),
             child:  ViewMoreBar(
-              text: "Recently Tourists" , weight: FontWeight.w500,size: 16,) ,
+              text: "Recently Tourists" , weight: FontWeight.w500,size: 16,) ,),
+           const Padding(
+            padding: EdgeInsets.only(bottom: 16.0, top: 8),
+            child:  ViewMoreBar(text: "Recently Tourists" , weight: FontWeight.w500,size: 16,) ,),
 
-           ),
           SizedBox(
             height: dimHeight(context) * .15,
             width: dimWidth(context),

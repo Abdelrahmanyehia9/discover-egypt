@@ -1,10 +1,8 @@
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart" ;
 import "package:get/get.dart";
-import "package:myegypt/constant.dart";
 import "package:myegypt/features/auth/presentation/login/view/login_view.dart";
 import "core/helper/binding.dart";
-import "features/home/presentation/view/home_view.dart";
 import "firebase_options.dart";
 
 
@@ -30,7 +28,6 @@ class MyEgypt extends StatelessWidget {
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
       home: const LoginView(),
-
     );
   }
 }
