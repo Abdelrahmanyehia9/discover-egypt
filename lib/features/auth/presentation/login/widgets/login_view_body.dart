@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/features/auth/presentation/login/widgets/toggle_auth_button.dart';
 import 'package:myegypt/features/auth/presentation/manger/Auth_view_model.dart';
-import 'package:myegypt/features/home/presentation/view/home_view.dart';
 import '../../../../../core/utils/dim.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../signup/view/sign_up_view.dart';
@@ -18,8 +17,8 @@ class LoginViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthViewModel>(
-init: AuthViewModel(),
-      builder: (controller) =>  Padding(
+      init: AuthViewModel(),
+      builder: (controller) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Form(
             key: _globalKey,
@@ -36,11 +35,13 @@ init: AuthViewModel(),
                 const SizedBox(
                   height: 16,
                 ),
+                /// enter email
                 CustomTextField(
                   hint: "email",
                   iconData: Icons.email,
                   controller: _emailController,
                 ),
+                ///enter password
                 CustomTextField(
                     hint: "Password",
                     iconData: Icons.lock,
@@ -48,7 +49,7 @@ init: AuthViewModel(),
                 const SizedBox(
                   height: 18,
                 ),
-
+                /// login button
                 CustomButton(
                   text: "Log in",
                   onTap: () {
@@ -56,18 +57,19 @@ init: AuthViewModel(),
                      controller.loginUsingEmailAndPassword(
                               email: _emailController.text.trim(),
                               password: _passwordController.text);
-                     Get.off(()=>const HomeView()) ;
                     }
                   },
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                ToggleAuthButton(
+               ToggleAuthButton(
                     text1: "Don't Have an Account ? ",
                     text2: "Sign up  ",
                     onPress: () {
-Navigator.push(context, MaterialPageRoute(builder: (_) => const SignUPView()));                    }),
+                  Get.to(() => const SignUPView());                    }),
+const SizedBox(height: 16,),
+
               ],
             ),
           ),

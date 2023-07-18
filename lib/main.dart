@@ -2,6 +2,7 @@ import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart" ;
 import "package:get/get.dart";
 import "package:myegypt/features/auth/presentation/login/view/login_view.dart";
+import "package:myegypt/features/welcome/splash/view/splash_screen.dart";
 import "core/helper/binding.dart";
 import "firebase_options.dart";
 
@@ -27,7 +28,7 @@ class MyEgypt extends StatelessWidget {
     return   GetMaterialApp(
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
-      home: const LoginView(),
+      home: const SplashView(),
     );
   }
 }

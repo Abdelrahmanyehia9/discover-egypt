@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import '../../data/model/place_model.dart';
 
@@ -16,8 +18,9 @@ final List<PlaceModel> model ;
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                model[index].image,
+              child: CachedNetworkImage(
+                placeholder:(context, url)=> Image.asset(placeHolder),
+                imageUrl: model[index].image,
                 width: dimWidth(context) * .22,
                 fit: BoxFit.cover,
               ),

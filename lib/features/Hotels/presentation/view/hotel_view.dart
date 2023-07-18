@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
  import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/view_more_bar.dart';
+import 'package:myegypt/features/Egypt/presentation/view/loading_view.dart';
 import 'package:myegypt/features/Hotels/presentation/viewModel/hotel_view_model.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/hotel_item.dart';
-import '../../../../constant.dart';
 import '../widgets/recommended_hotel.dart';
 
 class HotelView extends StatelessWidget {
@@ -17,7 +17,7 @@ return Padding(
   padding: const EdgeInsets.symmetric(horizontal: 12.0),
   child:   GetBuilder<HotelViewModel>(
     init:  HotelViewModel(),
-    builder:(controller) => controller.loading.value==true ? Center(child: CircularProgressIndicator(color: mainColor,)) :Column(
+    builder:(controller) => controller.loading.value ? const PlacesViewLoading() :Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 12,) ,

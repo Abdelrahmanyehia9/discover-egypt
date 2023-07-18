@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
@@ -30,8 +31,9 @@ final HotelModel model ;
             child: SizedBox(
                 width: dimWidth(context) * 0.55,
                 height: dimHeight(context) * 0.265,
-                child: Image.network(
-                   model.imagePath ,
+                child: CachedNetworkImage(
+                  placeholder: (context , url)=>Image.asset(placeHolder),
+                  imageUrl: model.imagePath ,
                   fit: BoxFit.fill,
                 )),
           ),
