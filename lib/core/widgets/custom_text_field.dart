@@ -65,3 +65,31 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 }
+
+class MyTextField extends StatelessWidget {
+  const MyTextField({Key? key, required this.hint, required this.controller, }) : super(key: key);
+  final String hint ;
+  final TextEditingController controller ;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Container(
+        decoration: BoxDecoration(border: Border.all(width: .5,
+            color: Colors.grey.shade600) ,
+            borderRadius:  BorderRadius.circular(2)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: TextFormField(
+            controller: controller,
+            cursorColor: mainColor,
+            decoration:  InputDecoration(
+                hintText:  hint , border: InputBorder.none),
+
+          ),
+
+        ),
+      ),
+    );
+  }
+}

@@ -4,9 +4,9 @@ import 'package:myegypt/features/auth/presentation/manger/Auth_view_model.dart';
 import 'package:myegypt/features/home/presentation/view/home_view.dart';
 import '../../../../../core/utils/dim.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../../login/view/login_view.dart';
-import '../../login/widgets/custom_buttom.dart';
-import '../../login/widgets/toggle_auth_button.dart';
+import '../view/login_view.dart';
+import 'custom_buttom.dart';
+import 'toggle_auth_button.dart';
 
 
 class SignUpViewBody extends StatefulWidget {
@@ -86,8 +86,13 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           _cPasswordController.text) {
                         controller.signUpUsingEmailAndPassword(
                                 email: _emailController.text.trim(),
-                                password: _passwordController.text);
+                                password: _passwordController.text ,
+                                 username: _usernameController.text.trim()
+                        );
                         Get.off(()=>const HomeView()) ;
+                      }else{
+
+                        Get.snackbar("password doesn't Match", "Password Doesn't Match Please ensure that you write  same password") ;
                       }
                     }
                   },

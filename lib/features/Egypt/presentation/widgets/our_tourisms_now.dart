@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
-import '../../data/model/place_model.dart';
+import '../../data/model/tourists_model.dart';
 
 class InEgyptNow extends StatelessWidget {
   const InEgyptNow({Key? key, required this.model}) : super(key: key);
-final List<PlaceModel> model ;
+final List<TouristsModel> model ;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

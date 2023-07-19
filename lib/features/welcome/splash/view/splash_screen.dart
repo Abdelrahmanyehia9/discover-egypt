@@ -12,8 +12,12 @@ class SplashView extends StatelessWidget {
       init: SplashViewModel(),
       builder:(controller) => Scaffold(
         backgroundColor: Colors.white,
-        body: Center(child: SizedBox(height: dimHeight(context)*0.4,
-            child: Image.asset("assets/images/logosplash.png")),),
+        body: Center(child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: dimHeight(context)*0.3,
+                child: Image.asset("assets/images/logosplash.png")),
+          ],
+        ),),
       ),
     );
   }

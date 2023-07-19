@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/core/utils/standard_packages.dart';
 
@@ -9,7 +10,8 @@ class TourGuideViewModel extends GetxController{
  final List<TourGuideModel> _listOfTour =[] ;
  List<TourGuideModel> get listOfTour => _listOfTour ;
  final CollectionReference _tourGuide = FirebaseFirestore.instance.collection("touGuides") ;
-
+ ValueNotifier<bool> get loading =>_loading;
+ final ValueNotifier<bool>_loading = ValueNotifier(false);
 
 
  TourGuideViewModel(){
@@ -18,6 +20,7 @@ class TourGuideViewModel extends GetxController{
   
   
   getTourGuide()async {
+   _loading.value = true ;
     var data = await _tourGuide.get();
 
     for (int i = 0; i < data.docs.length; i++) {
@@ -26,6 +29,7 @@ class TourGuideViewModel extends GetxController{
     }
     _listOfTour[0].packages =crisPack ;
     _listOfTour[1].packages = lioPack ;
+    _loading.value =false ;
     update() ;
   }
   

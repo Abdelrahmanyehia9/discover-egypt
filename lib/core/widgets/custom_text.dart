@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText(
@@ -18,8 +19,8 @@ class CustomText extends StatelessWidget {
 
         text,
         textAlign: align,
-        style: TextStyle(
-          overflow: TextOverflow.fade,
+        style: GoogleFonts.pangolin(
+
             color: color ?? Colors.black,
             fontSize: size ?? 14,
             fontWeight: fontWeight),

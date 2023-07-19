@@ -9,15 +9,12 @@ class PlacesViewModel extends GetxController{
   final ValueNotifier<bool>_loading = ValueNotifier(false);
   List<PlaceModel> get places =>_placesModelList ;
   final List<PlaceModel> _placesModelList = [] ;
-   List<PlaceModel> get tourists =>_touristsList ;
-   final List<PlaceModel> _touristsList = [] ;
+
   final CollectionReference _placesModel = FirebaseFirestore.instance.collection("places") ;
-   final CollectionReference _tourists = FirebaseFirestore.instance.collection("tourists") ;
 
   PlacesViewModel(){
 
     getPlaces() ;
-    getTourist()  ;
   }
 
 getPlaces() async {
@@ -30,17 +27,6 @@ _loading.value = false ;
 
 }
 update();
-}
-getTourist()async{
-    loading.value = true ;
-    var result = await _tourists.get();
-    for( int i = 0 ; i<result.docs.length ; i++){
-      _touristsList.add(PlaceModel.fromJson(result.docs[i].data())) ;
-      _loading.value = false ;
-
-    }
-    update();
-
 }
 
 

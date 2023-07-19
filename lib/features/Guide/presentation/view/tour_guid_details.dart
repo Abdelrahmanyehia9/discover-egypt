@@ -5,7 +5,7 @@ import 'package:myegypt/features/Guide/presentation/view/tour_guide_details_body
 
 
 class TourGuideDetails extends StatelessWidget {
-  const TourGuideDetails({Key? key, required this.mode,}) : super(key: key);
+  const TourGuideDetails({Key? key, required this.mode,  }) : super(key: key);
   final TourGuideModel mode ;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class TourGuideDetails extends StatelessWidget {
           ),
         ],
       ),
-      body:  TourGuideDetailsBody(model: mode),
+      body:  TourGuideDetailsBody(model: mode ),
     );
   }
 }

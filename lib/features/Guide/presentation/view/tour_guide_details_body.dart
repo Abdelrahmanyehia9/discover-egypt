@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
+import '../../../home/data/local_shared_prefrences.dart';
 import '../widgets/information_row.dart';
 import '../widgets/profile_pic_of_tour_guide.dart';
 import '../widgets/score_column_tour_guide.dart';
 import '../widgets/tour_guied_package.dart';
 
 class TourGuideDetailsBody extends StatelessWidget {
-  const TourGuideDetailsBody({Key? key, required this.model}) : super(key: key);
+  const TourGuideDetailsBody({Key? key, required this.model, }) : super(key: key);
 final TourGuideModel model   ;
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,9 @@ final TourGuideModel model   ;
                     child: const Text("Book Custom Trip")),
 
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setValue(false);
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.grey.shade300 , ),
                   child: CustomText(text :"Book Selected Trip" , color: Colors.black.withOpacity(0.6),),
                 ),

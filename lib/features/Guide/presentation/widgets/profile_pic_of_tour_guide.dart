@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
@@ -21,9 +22,10 @@ final TourGuideModel model ;
           child: SizedBox(
             height: dimHeight(context) * 0.22,
             width: dimWidth(context) * 0.35,
-            child: Image.network(
-              model.imagePath,
+            child: CachedNetworkImage(
+            imageUrl:  model.imagePath,
               fit: BoxFit.fill,
+              placeholder: (context, url)=>Image.asset(placeHolder),
             ),
           ),
         ),

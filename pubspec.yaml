@@ -44,6 +44,10 @@ dependencies:
   firebase_auth: ^4.6.3
   shimmer: ^3.0.0
   cached_network_image: ^3.2.3
+  flutter_image_slideshow: ^0.1.6
+  google_fonts:
+  intl: ^0.17.0
+
 
 dev_dependencies:
   flutter_test:

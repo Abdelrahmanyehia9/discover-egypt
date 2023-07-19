@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/features/Egypt/presentation/view/discover_all_egypt.dart';
 import 'package:myegypt/features/Egypt/presentation/viewmodel/places_view_model.dart';
+import 'package:myegypt/features/Egypt/presentation/viewmodel/tourists_view_model.dart';
 import '../../../../core/widgets/view_more_bar.dart';
 import '../widgets/img_item.dart';
 import '../widgets/our_tourisms_now.dart';
@@ -45,10 +46,13 @@ class PlacesView extends StatelessWidget {
               child:  ViewMoreBar(
                 text: "Recently Tourists" , weight: FontWeight.w500,size: 16,) ,),
 
-            SizedBox(
-              height: dimHeight(context) * .15,
-              width: dimWidth(context),
-              child:  InEgyptNow(model: controller.tourists,),
+            GetBuilder<TouristsViewModel>(
+              init: TouristsViewModel(),
+              builder:(controller)=> SizedBox(
+                height: dimHeight(context) * .15,
+                width: dimWidth(context),
+                child:  InEgyptNow(model: controller.tourists,),
+              ),
             ),
           ]),
         ),

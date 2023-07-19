@@ -4,6 +4,7 @@ import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
 import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../view/tour_guid_details.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class TourGuideItem extends StatelessWidget {
   const TourGuideItem({Key? key, required this.model}) : super(key: key);
@@ -29,8 +30,11 @@ final TourGuideModel  model ;
             children: [
               Stack(alignment: AlignmentDirectional.bottomEnd,
                 children:  [
-                  CircleAvatar(radius: 50,
-                    backgroundImage: NetworkImage(model.imagePath),
+                   CircleAvatar(radius: 50,
+                    backgroundImage: CachedNetworkImageProvider(
+                      model.imagePath
+                    ),
+                     backgroundColor: Colors.grey,
 
                   ),
                    Positioned(right: 15,
@@ -43,6 +47,7 @@ final TourGuideModel  model ;
 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                    CustomText(text:model.name , fontWeight: FontWeight.bold,
                     size: 16,),
                   const SizedBox(height: 3,),

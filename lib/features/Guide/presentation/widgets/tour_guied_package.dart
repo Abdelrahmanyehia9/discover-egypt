@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constant.dart';
@@ -13,12 +14,13 @@ final  TourGuidePackageModel p ;
     return ListTile(
       horizontalTitleGap: 15,
       minVerticalPadding: 0,
-      leading: Image.network(
+      leading: CachedNetworkImage(
 
-        p.images.first ,
+        imageUrl: p.images.first ,
         fit: BoxFit.fill,
         width: 80,
         height: 100,
+        placeholder: (context , url)=>Image.asset(placeHolder),
       ),
       title:  CustomText(
         text: p.tittle,
