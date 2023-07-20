@@ -5,9 +5,13 @@ class SignUpModel {
   final String? country;
   final String dateOfReges;
   final bool? isMale;
+  final String? birthDate ;
 
   SignUpModel(
-      {required this.userName,
+
+      {
+        this.birthDate,
+        required this.userName,
       required this.email,
       required this.passWord,
        this.country,
@@ -22,6 +26,7 @@ class SignUpModel {
       country: json['country'],
       dateOfReges: json['date'],
       isMale: json['isMale'],
+      birthDate: json['"birthDate"']
     );
   }
 
@@ -33,7 +38,8 @@ class SignUpModel {
     'password':passWord ,
     'country': country ,
     'date':dateOfReges ,
-    "isMale":isMale
+    "isMale":isMale ,
+      'birthDate':birthDate
 
     };
   }

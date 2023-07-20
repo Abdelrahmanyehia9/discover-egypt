@@ -67,9 +67,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 }
 
 class MyTextField extends StatelessWidget {
-  const MyTextField({Key? key, required this.hint, required this.controller, }) : super(key: key);
+  const MyTextField({Key? key, required this.hint,  this.controller, }) : super(key: key);
   final String hint ;
-  final TextEditingController controller ;
+  final TextEditingController? controller ;
   @override
   Widget build(BuildContext context) {
     return Padding(

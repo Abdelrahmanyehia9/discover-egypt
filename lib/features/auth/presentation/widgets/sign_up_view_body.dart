@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/features/auth/presentation/manger/Auth_view_model.dart';
+import 'package:myegypt/features/auth/presentation/widgets/complete_info_body.dart';
 import 'package:myegypt/features/home/presentation/view/home_view.dart';
 import '../../../../../core/utils/dim.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -42,6 +43,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthViewModel>(
+      init: AuthViewModel(),
       builder: (controller) =>  Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Form(
@@ -89,6 +91,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                                 password: _passwordController.text ,
                                  username: _usernameController.text.trim()
                         );
+                        SignUpUserInfo.username = _usernameController.text.trim() ;
                         Get.off(()=>const HomeView()) ;
                       }else{
 

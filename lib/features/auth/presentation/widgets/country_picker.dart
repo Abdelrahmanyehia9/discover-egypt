@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:myegypt/features/auth/presentation/widgets/complete_info_body.dart';
 
 class CountryPicker extends StatefulWidget {
 
@@ -24,9 +25,10 @@ class _CountryPickerState extends State<CountryPicker> {
           hintText: country == null ? "chose your country" : country!.name
       ),
       onTap: (){
-        showCountryPicker(context: context, onSelect: (country){
+        showCountryPicker(context: context, onSelect: (value){
           setState(() {
-            country = country ;
+            country = value ;
+            SignUpUserInfo.country = country!.name ;
           });
 
         }) ;

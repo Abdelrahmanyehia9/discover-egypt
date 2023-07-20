@@ -20,7 +20,7 @@ class AuthViewModel extends GetxController {
         userName: userName, email: email, passWord: passWord,  dateOfReges:
     DateTime.now().toString()
     ) ;
-    signup.add(user.toJson()) ;
+    signup.doc(_auth.currentUser!.email).set(user.toJson());
 
   }
 
@@ -60,6 +60,11 @@ class AuthViewModel extends GetxController {
     }
   }
 
-
+ updateInfoSignUp({required String country , required String date , required bool isMale}){
+    
+    signup.doc(_auth.currentUser!.email).update({'country':country , 'birthDate':date , 'isMale':isMale});
+    
+    
+}
 
 }

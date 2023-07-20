@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:myegypt/features/auth/presentation/widgets/complete_info_body.dart';
 
 class BirthDayPicker extends StatefulWidget {
   const BirthDayPicker({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _BirthDayPickerState extends State<BirthDayPicker> {
     if (picked != null ) {
       setState(() {
         selectedDate = picked;
+        SignUpUserInfo.birthDate = DateFormat.yMd().format(selectedDate!) ;
       });
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myegypt/features/auth/presentation/widgets/complete_info_body.dart';
 
 class DropDownMenu extends StatefulWidget {
   const DropDownMenu({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
             (val) {
           return DropdownMenuItem<String>(
             value: val,
-            child: Text(val ),
+            child: Text(val),
 
           );
         },
@@ -34,6 +35,11 @@ class _DropDownMenuState extends State<DropDownMenu> {
         setState(
               () {
             _dropDownValue = val;
+            if(_dropDownValue == 'Male'){
+              SignUpUserInfo.isMale = true ;
+            }else{
+              SignUpUserInfo.isMale = false ;
+            }
           },
         );
       },

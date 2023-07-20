@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
+import 'package:myegypt/features/Egypt/presentation/viewmodel/tourists_view_model.dart';
+import 'package:myegypt/features/auth/presentation/manger/Auth_view_model.dart';
 import 'package:myegypt/features/auth/presentation/widgets/custom_buttom.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../../../../core/widgets/custom_text_field.dart';
@@ -9,8 +12,6 @@ import 'country_picker.dart';
 import 'drop_down.dart';
 
 class CompleteInfoBody extends StatelessWidget {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
 
   CompleteInfoBody({super.key});
@@ -33,8 +34,8 @@ class CompleteInfoBody extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            MyTextField(hint: 'First Name', controller: _firstNameController),
-            MyTextField(hint: 'Last Name', controller: _lastNameController),
+            const MyTextField(hint: 'First Name'),
+            const MyTextField(hint: 'Last Name'),
             MyTextField(hint: 'Phone Number', controller: _mobileController),
             const SizedBox(
               height: 4,
@@ -65,7 +66,22 @@ class CompleteInfoBody extends StatelessWidget {
             CustomButton(
               text: 'Next',
               color: mainColor,
-              onTap: () {},
+              onTap: () {
+                AuthViewModel().updateInfoSignUp(
+                    country: SignUpUserInfo.country ?? 'Egypt',
+                    date: SignUpUserInfo.birthDate ?? '00/00/0000',
+                    isMale: SignUpUserInfo.isMale ?? true);
+                if (SignUpUserInfo.country != 'Egypt') {
+                  TouristsViewModel().addTourists(
+                    userName: SignUpUserInfo.username ?? 'Pharaoh',
+                    email: FirebaseAuth.instance.currentUser!.email!,
+                    passWord: 'NotFound',
+                    country: SignUpUserInfo.country!,
+                    birthDate: SignUpUserInfo.birthDate ?? 'null',
+                    isMale: SignUpUserInfo.isMale ?? true,
+                  );
+                }
+              },
             ),
             SizedBox(
               height: dimHeight(context) * .02,
@@ -75,4 +91,14 @@ class CompleteInfoBody extends StatelessWidget {
       ),
     );
   }
+}
+
+class SignUpUserInfo {
+  static String? username;
+
+  static String? country;
+
+  static String? birthDate;
+
+  static bool? isMale;
 }

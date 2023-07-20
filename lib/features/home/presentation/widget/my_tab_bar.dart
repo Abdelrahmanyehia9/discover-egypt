@@ -1,7 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/constant.dart';
-import 'package:myegypt/features/Hotels/presentation/view/hotel_view.dart';
+import 'package:myegypt/features/Hotels/presentation/view/hotels_view.dart';
 import 'package:myegypt/features/Egypt/presentation/view/place_view.dart';
 
 import '../../../Guide/presentation/view/tour_guide.dart';
@@ -36,7 +36,7 @@ class MyButtonTabBar extends StatelessWidget {
             child: TabBarView(
                 children: [
                   PlacesView(),
-                  HotelView() ,
+                  HotelsView() ,
                   Center(child: Text("Not Available yet ")),
                   TourGuide(),
                 ]),
