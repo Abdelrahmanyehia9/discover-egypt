@@ -47,6 +47,10 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   google_fonts:
   intl: ^0.17.0
+  flutter_rounded_date_picker: ^3.0.4
+  image_picker: ^1.0.1
+  firebase_storage: ^11.2.5
+  path:
 
 
 dev_dependencies:

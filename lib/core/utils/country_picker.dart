@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:myegypt/features/auth/presentation/widgets/complete_info_body.dart';
+
+import '../../features/auth/presentation/view/coplete_info_view.dart';
 
 class CountryPicker extends StatefulWidget {
 

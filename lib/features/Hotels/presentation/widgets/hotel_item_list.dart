@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/features/Hotels/data/model/hotel_model.dart';
 import 'package:myegypt/features/Hotels/presentation/book_hotel.dart';
+import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
+import 'package:myegypt/features/Hotels/presentation/viewModel/hotel_view_model.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/range_time.dart';
 import '../../../../constant.dart';
 import '../../../../core/utils/dim.dart';
@@ -10,8 +12,11 @@ import '../../../../core/widgets/custom_text.dart';
 import 'book_personal.dart';
 
 class HotelItemList extends StatelessWidget {
-  const HotelItemList({Key? key, required this.model}) : super(key: key);
-final HotelModel model ;
+  HotelItemList({Key? key, required this.model}) : super(key: key);
+  final HotelModel model;
+
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,26 +43,33 @@ final HotelModel model ;
                 SizedBox(
                     height: 100,
                     width: 80,
-                    child: CachedNetworkImage(fit: BoxFit.fill,
-                      imageUrl : model.imagePath ,
-                      placeholder: (context , url) =>Image.asset(placeHolder),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: model.imagePath,
+                      placeholder: (context, url) => Image.asset(placeHolder),
                     )),
-                const SizedBox(width: 8,) ,
+                const SizedBox(
+                  width: 8,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
                       ///tittle and rating
                       Row(
-
                         children: [
+
                           /// hotel name
-                           CustomText(
+                          CustomText(
                             text: model.name,
                             size: 16,
                             fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(width: 4,) ,
+                          const SizedBox(
+                            width: 4,
+                          ),
+
                           ///rating
                           SizedBox(
                             width: 40,
@@ -65,42 +77,61 @@ final HotelModel model ;
                             child: ListView.builder(
                                 itemCount: model.rating,
                                 scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) => Icon(
-                                  Icons.star,
-                                  color: Colors.yellow.shade600,
-                                  size: 8,
-                                )),
+                                itemBuilder: (context, index) =>
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow.shade600,
+                                      size: 8,
+                                    )),
                           )
                         ],
                       ),
-                      SizedBox(height: 8,) ,
+                      const SizedBox(
+                        height: 8,
+                      ),
+
                       /// overview and book button
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-
                               height: dimHeight(context) * .0772,
-                              width: dimWidth(context)*0.4,
+                              width: dimWidth(context) * 0.4,
                               child: Text(
-
                                 model.overView,
                                 overflow: TextOverflow.fade,
                                 style: const TextStyle(fontSize: 12),
                               )),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                bookHotel() ;
-                              },
-                              style: ElevatedButton.styleFrom(backgroundColor: mainColor),
-                              child: const Text("book"),
-                            ),
+                          GetBuilder<BookHotelViewModel>(
+                            init: BookHotelViewModel(),
+                            builder: (controller) =>
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      bookHotel(globalKey: globalKey,
+                                          model: model,
+                                          onConfirm: () {
+                                            if (globalKey.currentState!.validate()) {
+                                              controller.bookHotel(
+                                                  hotelName: model.name,
+                                                  dateFrom: BookHotelViewModel
+                                                      .range.toString(),
+                                                  numOfDays: BookHotelViewModel.numOfDays,
+                                                  adults: BookHotelViewModel.adults,
+                                                  children: BookHotelViewModel.children) ;
+                                            }
+                                          });
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: mainColor),
+                                    child: const Text("book"),
+                                  ),
+                                ),
                           ),
-
                         ],
                       ),
+
                       /// price
                       CustomText(
                         text: "${model.price}\$ per Night",
@@ -112,11 +143,11 @@ final HotelModel model ;
               ],
             ),
           ),
-           Positioned(
+          Positioned(
               bottom: 8,
               right: 9,
               child: Text(
-                model.isRecommended?"recommended":"",
+                model.isRecommended ? "recommended" : "",
                 style: const TextStyle(
                     color: Colors.green,
                     fontSize: 12,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:myegypt/features/Hotels/presentation/view/hotel_view.dart';
 import '../../../../constant.dart';
 import '../../../../core/utils/dim.dart';
@@ -46,6 +44,7 @@ class AllHotelViewBody extends StatelessWidget {
 
                   itemCount: controller.hotelList.length,
                   itemBuilder: (context , index)=> InkWell(onTap: (){
+
                     Get.to(()=>HotelView(model: controller.hotelList[index])) ;
                   },
                       child: HotelItemList(model: controller.hotelList[index],))),

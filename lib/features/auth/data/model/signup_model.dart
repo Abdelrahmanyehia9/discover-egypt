@@ -6,10 +6,12 @@ class SignUpModel {
   final String dateOfReges;
   final bool? isMale;
   final String? birthDate ;
+  final String? imagePath  ;
 
   SignUpModel(
 
       {
+        this.imagePath ,
         this.birthDate,
         required this.userName,
       required this.email,
@@ -26,7 +28,8 @@ class SignUpModel {
       country: json['country'],
       dateOfReges: json['date'],
       isMale: json['isMale'],
-      birthDate: json['"birthDate"']
+      birthDate: json['"birthDate"'],
+      imagePath: json['imagePath']
     );
   }
 
@@ -39,8 +42,8 @@ class SignUpModel {
     'country': country ,
     'date':dateOfReges ,
     "isMale":isMale ,
-      'birthDate':birthDate
-
+      'birthDate':birthDate ,
+      'imagePath': imagePath
     };
   }
 }

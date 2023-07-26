@@ -23,7 +23,7 @@ final List<TouristsModel> model ;
                 imageUrl: model[index].image,
                 width: dimWidth(context) * .22,
                 fit: BoxFit.cover,
-              ),
+              )
             ),
           );
         });

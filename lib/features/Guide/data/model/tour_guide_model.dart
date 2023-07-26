@@ -10,7 +10,7 @@ class TourGuideModel {
   final int trips;
   final int liked;
   final bool isAvailable ;
-  List<TourGuidePackageModel>packages = [] ;
+  List<TourGuidePackageModel> packages = [] ;
 
   TourGuideModel( {
     required this.isAvailable,

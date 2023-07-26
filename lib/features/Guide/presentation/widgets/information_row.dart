@@ -6,7 +6,6 @@ class InformationRow extends StatelessWidget {
   const InformationRow({Key? key, required this.icon, required this.text})
       : super(key: key);
   final IconData icon;
-
   final String text;
 
   @override

@@ -8,7 +8,7 @@ subTittle: "Escape Giza’s persistent hawkers and enjoy three classic Egyptian 
     'https://d1b3667xvzs6rz.cloudfront.net/2020/12/IMG-20201220-WA0004.jpg' ,
   ] ,
   price: "125.25" ,
-  rating: 4.5 ,
+  rating: "4.5" ,
   opening:  [ '8:00 am' , '3:00 pm']
 ) ;
 TourGuidePackageModel p2 = TourGuidePackageModel(tittle: 'Egyptian  Museum '  ,
@@ -31,7 +31,7 @@ subTittle: 'At a height of 600 feet, this tower offers magnificent views of the 
     opening:  [
       '9:00 am' , '5:00 pm'
     ] ,
-  rating: 3.8 ,
+  rating: "3.8" ,
 
 ) ;
 TourGuidePackageModel l1 = TourGuidePackageModel(tittle: 'Luxor City'  ,
@@ -44,7 +44,7 @@ subTittle: 'Step back in time with a full-day tour of Luxor’s ancient tombs an
   ] ,
   price: "499.99" ,
 
-  rating: 4.4 ,
+  rating:" 4.4 ",
 
 ) ;
 TourGuidePackageModel as1 = TourGuidePackageModel(tittle: 'Aswan City'  ,
@@ -54,7 +54,7 @@ subTittle: "Experience the wonders of Aswan with Emo Tours Egypt's private tours
   ] ,
   price: "199.99" ,
 
-  rating: 3.8 ,
+  rating: "3.8" ,
 
 ) ;
 List<TourGuidePackageModel>crisPack=[p1, p2 , l1 ];

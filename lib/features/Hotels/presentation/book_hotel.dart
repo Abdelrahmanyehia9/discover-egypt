@@ -1,15 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/core/utils/dim.dart';
+import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/book_personal.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/range_time.dart';
 
 import '../../../constant.dart';
 import '../../../core/widgets/custom_text.dart';
+import '../data/model/hotel_model.dart';
 
-void bookHotel(){
+void bookHotel({required VoidCallback onConfirm ,required HotelModel model , required GlobalKey<FormState> globalKey }) {
 
 
   Get.defaultDialog(
+    onConfirm: onConfirm ,
       contentPadding: const EdgeInsets.only(left: 24 , right: 24 , bottom: 24),
       cancelTextColor: mainColor,
       confirmTextColor: Colors.white,
@@ -18,16 +23,17 @@ void bookHotel(){
       textConfirm: 'book',
       title: "Book Hotel" ,
       content: Column(children: [
-        const Text("Hotel Name") ,
+         Text(model.name) ,
         const SizedBox(height: 8,) ,
-        Image.network("https://static.leonardo-hotels.com/image/leonardohotelbucharestcitycenter_room_comfortdouble2_2022_4000x2600_7e18f254bc75491965d36cc312e8111f_1200x780_mobile_3.jpeg"),
+        CachedNetworkImage(width: double.infinity, height: 150,fit: BoxFit.fill,
+          imageUrl: model.imagePath , ),
         const SizedBox(height: 8,) ,
         const CustomText(text: "choose period") ,
         const SizedBox(height: 8,) ,
-        const RangeTimePicker() ,
-        SizedBox(height: 16,),
-        BookPersonHotel(text: 'Adults', num: 0,) ,
-        BookPersonHotel(text: 'Children', num: 0,) ,
+          RangeTimePicker(globalKey: globalKey,) ,
+        const SizedBox(height: 16,),
+        BookPersonHotel(text: 'Adults', num: BookHotelViewModel.adults) ,
+        BookPersonHotel(text: 'Children', num: BookHotelViewModel.children) ,
 
       ],)
   );
