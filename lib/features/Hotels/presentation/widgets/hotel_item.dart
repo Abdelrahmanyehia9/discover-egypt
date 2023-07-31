@@ -8,7 +8,8 @@ import '../../data/model/hotel_model.dart';
 
 class HotelItem extends StatelessWidget {
   const HotelItem({Key? key, required this.model}) : super(key: key);
-final HotelModel model ;
+  final HotelModel model;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +33,8 @@ final HotelModel model ;
                 width: dimWidth(context) * 0.55,
                 height: dimHeight(context) * 0.265,
                 child: CachedNetworkImage(
-                  placeholder: (context , url)=>Image.asset(placeHolder),
-                  imageUrl: model.imagePath ,
+                  placeholder: (context, url) => Image.asset(placeHolder),
+                  imageUrl: model.imagePath,
                   fit: BoxFit.fill,
                 )),
           ),
@@ -46,7 +47,7 @@ final HotelModel model ;
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   CustomText(
+                  CustomText(
                     text: model.name,
                     fontWeight: FontWeight.w400,
                     size: 16,

@@ -6,70 +6,86 @@ import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
 
 class BookPersonHotel extends StatefulWidget {
-   BookPersonHotel({Key? key, required this.text , required this.num}) : super(key: key);
+  BookPersonHotel({Key? key, required this.text, required this.num})
+      : super(key: key);
   final String text;
 
-    int num   ;
+  int num;
 
-
-   @override
+  @override
   State<BookPersonHotel> createState() => _BookPersonHotelState();
 }
 
 class _BookPersonHotelState extends State<BookPersonHotel> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0 , vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
-
-          CustomText(text: widget.text , fontWeight: FontWeight.bold, size: 18,) ,
+          CustomText(
+            text: widget.text,
+            fontWeight: FontWeight.bold,
+            size: 18,
+          ),
           Row(
             children: [
               InkWell(
-                onTap: (){
-                setState(() {
-                  if(
-                  widget.text == "Adults"){BookHotelViewModel.adults ++ ; }else{BookHotelViewModel.children ++ ; }
-                  widget.num ++ ;
-
-
-                });
-              },
-                child: CircleAvatar(radius: 18,backgroundColor: mainColor,
-                  child: const Icon(Icons.add , size: 16, color: Colors.white,),),
-              )
-              ,  Padding(
+                onTap: () {
+                  setState(() {
+                    if (widget.text == "Adults") {
+                      BookHotelViewModel.adults++;
+                    } else {
+                      BookHotelViewModel.children++;
+                    }
+                    widget.num++;
+                  });
+                },
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: mainColor,
+                  child: const Icon(
+                    Icons.add,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Text( widget.num.toString() , style:const TextStyle(fontSize: 16 , )  ) ,
-              ) ,
-              InkWell(onTap: (){
-               if (widget.num != 1 && widget.text == "Adults"){
-                 setState(() {
-                   widget.num --;
-                   BookHotelViewModel.adults -- ;
-                 });
-                }else  if (widget.num != 0 && widget.text != "Adults"){
-                 setState(() {
-                   widget.num --;
-                   BookHotelViewModel.children -- ;
-                 });
-                }              },
-                child:   CircleAvatar(radius: 18,backgroundColor: mainColor,
-                  child: const Icon(Icons.remove , size: 16, color: Colors.white,),),
+                child: Text(widget.num.toString(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                    )),
+              ),
+              InkWell(
+                onTap: () {
+                  if (widget.num != 1 && widget.text == "Adults") {
+                    setState(() {
+                      widget.num--;
+                      BookHotelViewModel.adults--;
+                    });
+                  } else if (widget.num != 0 && widget.text != "Adults") {
+                    setState(() {
+                      widget.num--;
+                      BookHotelViewModel.children--;
+                    });
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: mainColor,
+                  child: const Icon(
+                    Icons.remove,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
               )
-
-
-
-            ],)
-
+            ],
+          )
         ],
-
-
       ),
     );
   }

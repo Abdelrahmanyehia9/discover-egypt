@@ -4,10 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/custom_text.dart';
-import 'package:myegypt/features/auth/presentation/view/coplete_info_view.dart';
 import 'package:myegypt/features/auth/presentation/widgets/custom_buttom.dart';
-import 'package:myegypt/features/home/presentation/view/home_view.dart';
-import '../../../Egypt/presentation/viewmodel/tourists_view_model.dart';
+import 'package:myegypt/features/home/presentation/view/toggle_pages.dart';
 import '../manger/Auth_view_model.dart';
 import '../manger/pick_image_controller.dart';
 
@@ -51,8 +49,6 @@ class ChoseProfilePic extends StatelessWidget {
                         kPicContainer("assets/images/Camera.png", () {
                           controller.upload(imgSource: ImageSource.camera);
                         }),
-
-
                       ],
                     )
                   : Stack(
@@ -87,34 +83,14 @@ class ChoseProfilePic extends StatelessWidget {
                 height: 18,
               ),
               CustomButton(
-                text: controller.image == null ?'skip': "Next" ,
+                text: controller.image == null ? 'skip' : "Next",
                 color: mainColor,
-                onTap: ()async{
-
-                 if(controller.image != null ) {
-  await controller.toFireStorage();
-}
-                  AuthViewModel().updateInfoSignUp(
-                    imagePath: SignUpUserInfo.imagePath!,
-                      country: SignUpUserInfo.country ?? 'Egypt',
-                      date: SignUpUserInfo.birthDate ?? '00/00/0000',
-                      isMale: SignUpUserInfo.isMale ?? true);
-                  if (SignUpUserInfo.country != 'Egypt' || SignUpUserInfo.country != null ) {
-                    TouristsViewModel().addTourists(
-                      imagePath: SignUpUserInfo.imagePath ?? "" ,
-                      country: SignUpUserInfo.country ?? '',
-                      birthDate: SignUpUserInfo.birthDate ?? ' ',
-                      mobile:SignUpUserInfo.mobile ?? '' ,
-                      userName: SignUpUserInfo.username ?? 'Pharaoh',
-                      isMale: SignUpUserInfo.isMale ?? true,
-                    );
-                  }
-
-                 Get.to(()=>const HomeView()) ;
-
+                onTap: () async {
+                  await controller.toFireStorage();
+                  AuthViewModel().updateInfoSignUp();
+                  Get.to(() => const TogglePages());
                 },
               ),
-
             ],
           ),
         ),

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:myegypt/constant.dart';
 
+import 'package:myegypt/constant.dart';
+import '../../../../core/helper/sign_up_data.dart';
 import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text_field.dart';
-import '../../../home/presentation/view/home_view.dart';
 import '../manger/Auth_view_model.dart';
 import '../widgets/custom_buttom.dart';
-import '../widgets/sign_up_view_body.dart';
 import '../widgets/toggle_auth_button.dart';
-import 'coplete_info_view.dart';
 import 'login_view.dart';
 
 class SignUPView extends StatelessWidget {
@@ -45,14 +41,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthViewModel>(
-      init: AuthViewModel(),
       builder: (controller) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
@@ -101,7 +95,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           email: _emailController.text.trim(),
                           password: _passwordController.text,
                           username: _usernameController.text.trim());
-                      SignUpUserInfo.username = _usernameController.text.trim();
+                      SignUpUserInfo.instance.username = _usernameController.text.trim();
 
                     } else {
                       Get.snackbar("password doesn't Match",
@@ -117,7 +111,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 text1: "Have Account already ! ",
                 text2: "Login ",
                 onPress: () {
-                  Get.to(() => const LoginView());
+                  Get.to(() =>  LoginView());
                 },
               ),
             ],

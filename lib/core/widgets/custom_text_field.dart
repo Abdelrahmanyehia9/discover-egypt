@@ -68,37 +68,35 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
 class MyTextField extends StatelessWidget {
   const MyTextField({
+    this.validNotNull,
     Key? key,
-    this.type ,
+    this.type,
     required this.hint,
-    this.validate ,
     this.controller,
   }) : super(key: key);
   final String hint;
-final String? Function(String?)? validate ;
   final TextEditingController? controller;
-  final TextInputType? type ;
-
+  final TextInputType? type;
+  final bool? validNotNull ;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(width: .5, color: Colors.grey.shade600),
-            borderRadius: BorderRadius.circular(2)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-          child: TextFormField(
-            keyboardType: type,
-            validator: validate,
-            controller: controller,
-            cursorColor: mainColor,
-            decoration:
-                InputDecoration(hintText: hint, border: InputBorder.none),
-          ),
-        ),
+      child: TextFormField(
+
+        keyboardType: type,
+        validator: validNotNull!= null ? (data) {if (data == "") {
+            return "field required";
+          } else {
+            return null;
+          }}:null,
+        controller: controller,
+        cursorColor: mainColor,
+        decoration:
+            InputDecoration(
+              border:OutlineInputBorder() ,
+                hintText: hint,),
       ),
     );
   }

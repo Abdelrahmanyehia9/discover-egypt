@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/book_personal.dart';
 import 'package:myegypt/features/Hotels/presentation/widgets/range_time.dart';
-
 import '../../../constant.dart';
 import '../../../core/widgets/custom_text.dart';
 import '../data/model/hotel_model.dart';

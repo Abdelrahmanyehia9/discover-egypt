@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:myegypt/features/Guide/data/model/tour_guide_model.dart';
 import 'package:myegypt/features/Guide/presentation/view/tour_guide_details_body.dart';
 
-
 class TourGuideDetails extends StatelessWidget {
-  const TourGuideDetails({Key? key, required this.mode,  }) : super(key: key);
-  final TourGuideModel mode ;
+  const TourGuideDetails({
+    Key? key,
+    required this.mode,
+  }) : super(key: key);
+  final TourGuideModel mode;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +17,8 @@ class TourGuideDetails extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: InkWell(
-          onTap: (){
-            Get.back() ;
+          onTap: () {
+            Get.back();
           },
           child: Icon(
             Icons.arrow_back,
@@ -32,12 +35,7 @@ class TourGuideDetails extends StatelessWidget {
           ),
         ],
       ),
-      body:  TourGuideDetailsBody(model: mode ),
+      body: TourGuideDetailsBody(model: mode),
     );
   }
 }
-
-
-
-
-

@@ -7,8 +7,12 @@ import '../../../../constant.dart';
 import '../../../../core/widgets/custom_text.dart';
 
 class ProfilePicOfGuide extends StatelessWidget {
-  const ProfilePicOfGuide({Key? key, required this.model, }) : super(key: key);
-final TourGuideModel model ;
+  const ProfilePicOfGuide({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+  final TourGuideModel model;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,9 +27,9 @@ final TourGuideModel model ;
             height: dimHeight(context) * 0.22,
             width: dimWidth(context) * 0.35,
             child: CachedNetworkImage(
-            imageUrl:  model.imagePath,
+              imageUrl: model.imagePath,
               fit: BoxFit.fill,
-              placeholder: (context, url)=>Image.asset(placeHolder),
+              placeholder: (context, url) => Image.asset(placeHolder),
             ),
           ),
         ),
@@ -34,14 +38,17 @@ final TourGuideModel model ;
           left: dimWidth(context) * 0.06,
           child: Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 4,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 4,
+            ),
             decoration: BoxDecoration(
-                color: mainColor,
-                borderRadius: BorderRadius.circular(16)),
+                color: mainColor, borderRadius: BorderRadius.circular(16)),
             width: dimWidth(context) * 0.24,
             height: dimHeight(context) * 0.04,
-            child:  CustomText(
-              text: model.name.contains(" ") ? model.name.substring(0,model.name.indexOf(" ")):model.name,
+            child: CustomText(
+              text: model.name.contains(" ")
+                  ? model.name.substring(0, model.name.indexOf(" "))
+                  : model.name,
               size: 10,
               color: Colors.white,
               fontWeight: FontWeight.bold,

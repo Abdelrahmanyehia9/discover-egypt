@@ -5,6 +5,8 @@ import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/custom_text.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:myegypt/features/Egypt/presentation/view/place_details/place_details_view.dart';
+import '../../../../core/utils/main_app_bar.dart';
 import '../../data/model/place_model.dart';
 import '../viewmodel/places_view_model.dart';
 
@@ -15,55 +17,54 @@ class DiscoverALlEgypt extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PlacesViewModel>(
       builder: (controller) => Scaffold(
+        extendBodyBehindAppBar: true,
 
+appBar: mainAppBar(),
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-                ImageSlideshow(
-                  height: dimHeight(context)*.35,
-                  indicatorBackgroundColor: Colors.white,
-                indicatorColor: mainColor,
-                autoPlayInterval: 3000,
-                    isLoop: true,
-                    children:
-                [
-                 Image.asset('assets/images/trip2.jpg' , fit: BoxFit.fill,) ,
-                  Image.asset('assets/images/trip1.jpg', fit: BoxFit.fill,) ,
-                  Image.asset('assets/images/trip4.jpg', fit: BoxFit.fill,) ,
-                  Image.asset('assets/images/trip3.jpeg', fit: BoxFit.fill,) ,
-                  Image.asset('assets/images/trip5.jpg', fit: BoxFit.fill,) ,
-                ]),
-                const Padding(
-                  padding: EdgeInsets.only(
-                      top: 16.0, right: 16 , left: 16),
-                  child: CustomText(
-                    text: "Discover Beautiful Places in Beautiful Country ",
-                    color: Colors.black,
-                    size: 24,
-                    fontWeight: FontWeight.w900,
-                  ),
+              ImageSlideshow(
+                height: dimHeight(context)*.35,
+                indicatorBackgroundColor: Colors.white,
+              indicatorColor: mainColor,
+              autoPlayInterval: 3000,
+                  isLoop: true,
+                  children:
+              [
+               Image.asset('assets/images/trip2.jpg' , fit: BoxFit.fill,) ,
+                Image.asset('assets/images/trip1.jpg', fit: BoxFit.fill,) ,
+                Image.asset('assets/images/trip4.jpg', fit: BoxFit.fill,) ,
+                Image.asset('assets/images/trip3.jpeg', fit: BoxFit.fill,) ,
+                Image.asset('assets/images/trip5.jpg', fit: BoxFit.fill,) ,
+              ]),
+              const Padding(
+                padding: EdgeInsets.only(
+                    top: 16.0, right: 16 , left: 16),
+                child: CustomText(
+                  text: "Discover Beautiful Places in Beautiful Country ",
+                  color: Colors.black,
+                  size: 24,
+                  fontWeight: FontWeight.w900,
                 ),
-                SizedBox(
-                  height: dimHeight(context)*.6,
-                  child: GridView.builder(
-                    physics: const ScrollPhysics(),
-                      itemCount: controller.places.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3),
-                      itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
-                            child: Item(
-                              model: controller.places[index],
-                            ),
-                          )),
-                ),
-              ],
-            ),
+              ),
+              Expanded(
+                child: GridView.builder(
+                  physics: const ScrollPhysics(),
+                    itemCount: controller.places.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                    itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4),
+                          child: Item(
+                            model: controller.places[index],
+                          ),
+                        )),
+              ),
+            ],
           )),
     );
   }
@@ -74,31 +75,37 @@ class Item extends StatelessWidget {
   final PlaceModel model;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: dimHeight(context) * 0.2,
-          width: dimWidth(context) * 0.5,
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
-          child: CachedNetworkImage(
-          imageUrl:  model.image,
-            fit: BoxFit.fill,
-            placeholder: (context, url)=>Image.asset(placeHolder),
+    return InkWell(
+      onTap: (){
+        Get.to(()=>  PlaceDetailsView(model:  model,)) ;
+      },
+
+      child: Stack(
+        children: [
+          Container(
+            height: dimHeight(context) * 0.2,
+            width: dimWidth(context) * 0.5,
+            decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+            child: CachedNetworkImage(
+            imageUrl:  model.image,
+              fit: BoxFit.fill,
+              placeholder: (context, url)=>Image.asset(placeHolder),
+            ),
           ),
-        ),
-        Container(
-          height: dimHeight(context) * 0.2,
-          width: dimWidth(context) * 0.5,
-          decoration: BoxDecoration(color: mainColor.withOpacity(0.5)),
-        ),
-        Center(
-            child: CustomText(
-          text: model.name,
-          color: Colors.white,
-          fontWeight: FontWeight.w900,
-          size: 18,
-        ))
-      ],
+          Container(
+            height: dimHeight(context) * 0.2,
+            width: dimWidth(context) * 0.5,
+            decoration: BoxDecoration(color: mainColor.withOpacity(0.5)),
+          ),
+          Center(
+              child: CustomText(
+            text: model.name,
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            size: 18,
+          ))
+        ],
+      ),
     );
   }
 }

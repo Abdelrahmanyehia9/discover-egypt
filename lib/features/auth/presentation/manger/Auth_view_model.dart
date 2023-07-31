@@ -7,9 +7,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/features/home/data/local_shared_prefrences.dart';
-import 'package:myegypt/features/home/presentation/view/home_view.dart';
+import 'package:myegypt/features/home/presentation/view/toggle_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/helper/sign_up_data.dart';
+import '../../../Egypt/presentation/viewmodel/tourists_view_model.dart';
 import '../../data/model/signup_model.dart';
 import '../view/coplete_info_view.dart';
 
@@ -17,14 +19,9 @@ class AuthViewModel extends GetxController {
   String get errorMessage => _errorMessage;
   String _errorMessage = 'something went Wrong';
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final CollectionReference signup = FirebaseFirestore.instance.collection('users');
- String? imgUrl ;
+  final CollectionReference signup =
+      FirebaseFirestore.instance.collection('users');
 
-
- AuthViewModel(){
-   getProfileImg() ;
-
- }
   void completeInfoSignUp(
       {required String email,
       required String passWord,
@@ -37,24 +34,13 @@ class AuthViewModel extends GetxController {
     signup.doc(_auth.currentUser!.email).set(user.toJson());
   }
 
-
-
-  Future<void> getProfileImg()async{
-    final DocumentReference model = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.email) ;
-         var results = await model.get() ;
-      imgUrl = await results.get("imagePath") ;
-      update() ;
-  }
-
-
-
   Future<void> loginUsingEmailAndPassword(
       {required String email, required String password}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       preferences.setBool(isLogin, true);
-      Get.off(() => const HomeView());
+      Get.off(() => const TogglePages());
     } catch (e) {
       if (e is FirebaseAuthException) {
         _errorMessage = e.message!;
@@ -73,7 +59,8 @@ class AuthViewModel extends GetxController {
           email: email, password: password);
       completeInfoSignUp(email: email, passWord: password, userName: username);
       setValue(true);
-      Get.off(() => const CompleteInfo(),
+      Get.off(
+        () => const CompleteInfo(),
       );
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -87,13 +74,23 @@ class AuthViewModel extends GetxController {
     }
   }
 
- void updateInfoSignUp(
-     {required String country, required String date, required bool isMale , String? imagePath}) {
-    signup
-        .doc(_auth.currentUser!.email)
-        .update({'country': country, 'birthDate': date, 'isMale': isMale , 'imagePath': imagePath});
+  void updateInfoSignUp() {
+    signup.doc(_auth.currentUser!.email).update({
+      'country': SignUpUserInfo.instance.country,
+      'birthDate': SignUpUserInfo.instance.birthDate,
+      'isMale': SignUpUserInfo.instance.isMale ?? true,
+      'imagePath': SignUpUserInfo.instance.imagePath
+    });
+
+    if (SignUpUserInfo.instance.country != 'Egypt') {
+      TouristsViewModel().addTourists(
+        imagePath: SignUpUserInfo.instance.imagePath ?? "",
+        country: SignUpUserInfo.instance.country ?? "Egypt",
+        birthDate: SignUpUserInfo.instance.birthDate ?? "0/0/000",
+        mobile: SignUpUserInfo.instance.mobile ?? "",
+        userName: SignUpUserInfo.instance.username ?? 'Pharaoh',
+        isMale: SignUpUserInfo.instance.isMale ?? true,
+      );
+    }
   }
 }
-
-
-

@@ -11,8 +11,12 @@ import '../widgets/score_column_tour_guide.dart';
 import '../widgets/tour_guied_package.dart';
 
 class TourGuideDetailsBody extends StatelessWidget {
-  const TourGuideDetailsBody({Key? key, required this.model, }) : super(key: key);
-final TourGuideModel model   ;
+  const TourGuideDetailsBody({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
+  final TourGuideModel model;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,12 +28,15 @@ final TourGuideModel model   ;
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /// profile and name of guide
-               ProfilePicOfGuide(model: model,),
+              ProfilePicOfGuide(
+                model: model,
+              ),
+
               /// likes and trips
               Padding(
                 padding: const EdgeInsets.only(top: 24.0),
                 child: Row(
-                  children:  [
+                  children: [
                     ScoreColumn(num: model.liked.toString(), text: "likes"),
                     const SizedBox(
                       width: 12,
@@ -40,44 +47,53 @@ final TourGuideModel model   ;
               )
             ],
           ),
+
           /// information of tour guide
-           InformationRow(
+          InformationRow(
             text: model.phoneNumber.toString(),
             icon: Icons.call,
           ),
-           InformationRow(
+          InformationRow(
             text: model.email,
             icon: Icons.email,
           ),
+
           /// packaged
           Expanded(
             child: ListView.builder(
-              itemCount: model.packages.length,
-                itemBuilder: (context, index) =>  Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TourGuidePackage(p: model.packages[index],),
-                )),
+                itemCount: model.packages.length,
+                itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TourGuidePackage(
+                        p: model.packages[index],
+                      ),
+                    )),
           ),
           const SizedBox(
             height: 12,
           ),
-          /// my buttons
-          Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:[
-                ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(backgroundColor: mainColor ,),
-                    child: const Text("Book Custom Trip")),
 
-                ElevatedButton(
-                  onPressed: () {
-                    setValue(false);
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.grey.shade300 , ),
-                  child: CustomText(text :"Book Selected Trip" , color: Colors.black.withOpacity(0.6),),
+          /// my buttons
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: mainColor,
                 ),
-              ]
-          ),
+                child: const Text("Book Custom Trip")),
+            ElevatedButton(
+              onPressed: () {
+                setValue(false);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey.shade300,
+              ),
+              child: CustomText(
+                text: "Book Selected Trip",
+                color: Colors.black.withOpacity(0.6),
+              ),
+            ),
+          ]),
           const SizedBox(
             height: 12,
           ),

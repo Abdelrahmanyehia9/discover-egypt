@@ -28,6 +28,7 @@ class PlacesViewLoading extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Shimmer.fromColors(
+                      period: const Duration(milliseconds: 800),
                       baseColor: Colors.grey.shade300,
                       highlightColor: Colors.grey.shade100,
                       child: Container(

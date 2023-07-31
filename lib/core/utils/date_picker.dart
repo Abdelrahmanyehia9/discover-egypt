@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../features/auth/presentation/view/coplete_info_view.dart';
+import '../helper/sign_up_data.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({Key? key, }) : super(key: key);
@@ -14,13 +15,13 @@ class _DatePickerState extends State<DatePicker> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+        initialDate: DateTime(2010 , 5),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2020));
     if (picked != null) {
       setState(() {
         selectedDate = picked;
-        SignUpUserInfo.birthDate = DateFormat.yMd().format(selectedDate!);
+        SignUpUserInfo.instance.birthDate = DateFormat.yMd().format(selectedDate!);
       });
     }
   }
@@ -28,29 +29,26 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: Form(
+      child: TextFormField(
+        validator: (data){
 
-        child: TextFormField(
-          validator: (data){
+          if (selectedDate == null ){
 
-            if (selectedDate == null ){
+            return 'please choose your birthdate' ;
+          }else{ return null  ; }
 
-              return 'this field required' ;
-            }else{ return null  ; }
-
-          },
-          onTap: () {
-            _selectDate(context);
-            SignUpUserInfo.birthDate  = selectedDate.toString() ;
-          },
-          readOnly: true,
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: 'data of birth',
-              hintText: selectedDate == null
-                  ? 'DD/MM/YYYY'
-                  : DateFormat.yMd().format(selectedDate!)),
-        ),
+        },
+        onTap: () {
+          _selectDate(context);
+          SignUpUserInfo.instance.birthDate  = selectedDate.toString() ;
+        },
+        readOnly: true,
+        decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: 'data of birth',
+            hintText: selectedDate == null
+                ? 'DD/MM/YYYY'
+                : DateFormat.yMd().format(selectedDate!)),
       ),
     );
   }

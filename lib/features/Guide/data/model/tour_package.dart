@@ -1,6 +1,5 @@
 class TourGuidePackageModel {
   final String? rating;
-
   final String tittle;
   final String subTittle;
   final String price;

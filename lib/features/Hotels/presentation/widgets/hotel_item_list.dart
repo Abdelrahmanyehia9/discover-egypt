@@ -4,12 +4,9 @@ import 'package:get/get.dart';
 import 'package:myegypt/features/Hotels/data/model/hotel_model.dart';
 import 'package:myegypt/features/Hotels/presentation/book_hotel.dart';
 import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
-import 'package:myegypt/features/Hotels/presentation/viewModel/hotel_view_model.dart';
-import 'package:myegypt/features/Hotels/presentation/widgets/range_time.dart';
 import '../../../../constant.dart';
 import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text.dart';
-import 'book_personal.dart';
 
 class HotelItemList extends StatelessWidget {
   HotelItemList({Key? key, required this.model}) : super(key: key);
@@ -55,11 +52,9 @@ class HotelItemList extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       ///tittle and rating
                       Row(
                         children: [
-
                           /// hotel name
                           CustomText(
                             text: model.name,
@@ -77,8 +72,7 @@ class HotelItemList extends StatelessWidget {
                             child: ListView.builder(
                                 itemCount: model.rating,
                                 scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) =>
-                                    Icon(
+                                itemBuilder: (context, index) => Icon(
                                       Icons.star,
                                       color: Colors.yellow.shade600,
                                       size: 8,
@@ -104,30 +98,33 @@ class HotelItemList extends StatelessWidget {
                               )),
                           GetBuilder<BookHotelViewModel>(
                             init: BookHotelViewModel(),
-                            builder: (controller) =>
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 4.0),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      bookHotel(globalKey: globalKey,
-                                          model: model,
-                                          onConfirm: () {
-                                            if (globalKey.currentState!.validate()) {
-                                              controller.bookHotel(
-                                                  hotelName: model.name,
-                                                  dateFrom: BookHotelViewModel
-                                                      .range.toString(),
-                                                  numOfDays: BookHotelViewModel.numOfDays,
-                                                  adults: BookHotelViewModel.adults,
-                                                  children: BookHotelViewModel.children) ;
-                                            }
-                                          });
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: mainColor),
-                                    child: const Text("book"),
-                                  ),
-                                ),
+                            builder: (controller) => Padding(
+                              padding: const EdgeInsets.only(right: 4.0),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  bookHotel(
+                                      globalKey: globalKey,
+                                      model: model,
+                                      onConfirm: () {
+                                        if (globalKey.currentState!
+                                            .validate()) {
+                                          controller.bookHotel(
+                                              hotelName: model.name,
+                                              dateFrom: BookHotelViewModel.range
+                                                  .toString(),
+                                              numOfDays:
+                                                  BookHotelViewModel.numOfDays,
+                                              adults: BookHotelViewModel.adults,
+                                              children:
+                                                  BookHotelViewModel.children);
+                                        }
+                                      });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: mainColor),
+                                child: const Text("book"),
+                              ),
+                            ),
                           ),
                         ],
                       ),

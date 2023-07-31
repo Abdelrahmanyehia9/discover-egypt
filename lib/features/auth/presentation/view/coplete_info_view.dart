@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/core/helper/validate.dart';
 import 'package:myegypt/features/auth/presentation/view/chose_profile_image.dart';
 import '../../../../constant.dart';
+import '../../../../core/helper/sign_up_data.dart';
 import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../../../../core/widgets/custom_text_field.dart';
@@ -51,18 +53,13 @@ class CompleteInfoBody extends StatelessWidget {
                 height: 15,
               ),
               const MyTextField(hint: 'First Name'  , ),
-              const MyTextField(hint: 'Last Name'),
-              MyTextField(hint: 'Phone Number',type: TextInputType.phone, controller: _mobileController , validate: (data){
-                if (data == ""){
-                  return "field required" ;
-                } else{
-                  return null ;
-                }
-              },),
+              const MyTextField(hint: 'Last Name' ),
+              MyTextField(hint: 'Phone Number',type: TextInputType.phone, controller: _mobileController, validNotNull: true
+              ,),
               const SizedBox(
                 height: 4,
               ),
-              const CountryPicker(),
+               const CountryPicker(),
               const SizedBox(
                 height: 8,
               ),
@@ -73,10 +70,10 @@ class CompleteInfoBody extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const CustomText(
+                   CustomText(
                     text: "i am",
                     fontWeight: FontWeight.w900,
-                    size: 24,
+                    size: 24,color: mainColor,
                   ),
                   SizedBox(
                       width: dimWidth(context) * .7, child: const DropDownMenu()),
@@ -90,9 +87,8 @@ class CompleteInfoBody extends StatelessWidget {
                 color: mainColor,
                 onTap: () {
                   if(global.currentState!.validate()){
-                    print(SignUpUserInfo.isMale) ;
-                    SignUpUserInfo.mobile =_mobileController.text.trim() ;
-                    Get.to(()=>const ChoseProfilePic()) ;
+                    SignUpUserInfo.instance.mobile =_mobileController.text.trim() ;
+                    Get.to(()=> const ChoseProfilePic()) ;
                   }
                   //
                   // }
@@ -111,11 +107,3 @@ class CompleteInfoBody extends StatelessWidget {
   }
 }
 
-class SignUpUserInfo {
-  static String? imagePath  ;
-  static String? username;
-  static String? country;
-  static String? birthDate;
-  static bool? isMale;
-  static String? mobile ;
-}

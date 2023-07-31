@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/helper/sign_up_data.dart';
 import '../view/coplete_info_view.dart';
 
 class DropDownMenu extends StatefulWidget {
@@ -37,9 +38,9 @@ class _DropDownMenuState extends State<DropDownMenu> {
           () {
             _dropDownValue = val;
             if (_dropDownValue == 'Male') {
-              SignUpUserInfo.isMale = true;
+              SignUpUserInfo.instance.isMale = true;
             } else {
-              SignUpUserInfo.isMale = false;
+              SignUpUserInfo.instance.isMale = false;
             }
           },
         );

@@ -6,33 +6,35 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myegypt/features/auth/presentation/view/coplete_info_view.dart';
 
-class PickImage extends GetxController{
+import '../../../../core/helper/sign_up_data.dart';
 
-File? image ;
-final picker = ImagePicker() ;
-Reference storage = FirebaseStorage.instance.ref('images/${FirebaseAuth.instance.currentUser!.email}/profile.jpg');
+class PickImage extends GetxController {
+  File? image;
 
-void upload({required ImageSource imgSource })async{
+  final picker = ImagePicker();
 
-  var pickedImage = await picker.pickImage(source: imgSource) ;
-  if(pickedImage != null ){
-    image =  File(pickedImage.path) ;
-
-
+  void upload({required ImageSource imgSource}) async {
+    var pickedImage = await picker.pickImage(source: imgSource);
+    if (pickedImage != null) {
+      image = File(pickedImage.path);
+    }
+    update();
   }
-  update();
-}
-void removeImage(){
 
-  image = null ;
-  update() ;
+  void removeImage() {
+    image = null;
+    update();
+  }
 
-}
-Future<void>toFireStorage()async{
-
-    storage.putFile(image!);
-    SignUpUserInfo.imagePath = await storage.getDownloadURL();
-update() ;
-}
-
+  Future<void> toFireStorage() async {
+    if (image != null) {
+      Reference storage = FirebaseStorage.instance.ref(
+          'images/${FirebaseAuth.instance.currentUser!.email}/profile.jpg');
+      await storage.putFile(image!);
+      SignUpUserInfo.instance.imagePath = await storage.getDownloadURL();
+      update();
+    } else {
+      return;
+    }
+  }
 }
