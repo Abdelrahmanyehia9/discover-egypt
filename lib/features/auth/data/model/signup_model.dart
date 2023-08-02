@@ -6,11 +6,14 @@ class SignUpModel {
   final String dateOfReges;
   final bool? isMale;
   final String? birthDate;
+  final List<String>? imageList;
 
   final String? imagePath;
 
   SignUpModel(
-      {this.imagePath,
+      {
+        this.imageList,
+       this.imagePath,
       this.birthDate,
       required this.userName,
       required this.email,
@@ -28,10 +31,12 @@ class SignUpModel {
         dateOfReges: json['date'],
         isMale: json['isMale'],
         birthDate: json['"birthDate"'],
-        imagePath: json['imagePath']);
+        imagePath: json['imagePath'] ,
+    );
   }
 
-  toJson() {
+  toJson()
+  {
     return {
       'username': userName,
       'email': email,

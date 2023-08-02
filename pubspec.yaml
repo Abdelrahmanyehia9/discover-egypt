@@ -52,6 +52,7 @@ dependencies:
   firebase_storage: ^11.2.5
   path:
   salomon_bottom_bar: ^3.3.2
+  modal_progress_hud_nsn:
 
 
 dev_dependencies:

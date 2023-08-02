@@ -44,10 +44,10 @@ class ChoseProfilePic extends StatelessWidget {
                   ? Column(
                       children: [
                         kPicContainer("assets/images/Gallery.png", () {
-                          controller.upload(imgSource: ImageSource.gallery);
+                          controller.uploadFromMyDevice(imgSource: ImageSource.gallery);
                         }),
                         kPicContainer("assets/images/Camera.png", () {
-                          controller.upload(imgSource: ImageSource.camera);
+                          controller.uploadFromMyDevice(imgSource: ImageSource.camera);
                         }),
                       ],
                     )
@@ -67,7 +67,7 @@ class ChoseProfilePic extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            controller.removeImage();
+                            controller.removeProfileImage();
                           },
                           child: CircleAvatar(
                             backgroundColor: mainColor,
@@ -86,7 +86,7 @@ class ChoseProfilePic extends StatelessWidget {
                 text: controller.image == null ? 'skip' : "Next",
                 color: mainColor,
                 onTap: () async {
-                  await controller.toFireStorage();
+                  await controller.profileToFireStorage();
                   AuthViewModel().updateInfoSignUp();
                   Get.to(() => const TogglePages());
                 },

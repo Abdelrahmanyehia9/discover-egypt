@@ -37,7 +37,7 @@ class BookHotelViewModel extends GetxController {
       }
     }
   }
-  void ifValid(BookHotelModel model)async{
+  Future<void> ifValid(BookHotelModel model)async{
 
     await validateDuplicate() ;
     if (valid) {
@@ -60,7 +60,7 @@ class BookHotelViewModel extends GetxController {
       required String dateFrom,
       required int numOfDays,
       required int adults,
-      required int children}) {
+      required int children}) async{
     BookHotelModel model = BookHotelModel(
         email: FirebaseAuth.instance.currentUser!.email!,
         username: 'SignUpUserInfo.username!',
@@ -70,7 +70,7 @@ class BookHotelViewModel extends GetxController {
         numOfDays: numOfDays,
         adults: adults,
         children: children);
-       ifValid(model) ;
+       await ifValid(model) ;
 
   }
 

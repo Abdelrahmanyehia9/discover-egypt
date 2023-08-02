@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myegypt/features/home/presentation/view/profile_view.dart';
 import 'package:myegypt/features/home/presentation/widget/home_view_body.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import '../../data/local_shared_prefrences.dart';
 import 'booking_hotel.dart';
 import 'favourite_view.dart';
 
@@ -14,7 +15,7 @@ class TogglePages extends StatefulWidget {
 }
 
 class _TogglePagesState extends State<TogglePages> {
-  int currentIndex = 1;
+  int currentIndex =  1;
 
   List<Widget> pages = [
     const FavouriteViewBody(),
@@ -46,6 +47,8 @@ class _TogglePagesState extends State<TogglePages> {
         ],
         onTap: (index) {
           setState(() {
+
+
             currentIndex = index;
           });
         },

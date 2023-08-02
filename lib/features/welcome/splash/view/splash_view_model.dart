@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:myegypt/features/home/presentation/view/toggle_pages.dart';
 import '../../../auth/presentation/view/login_view.dart';
@@ -9,7 +11,7 @@ class SplashViewModel extends GetxController{
   void onInit() async{
 
       final bool logIn = await getValue() ;
-      Future.delayed(const Duration(seconds: 3), ()  {
+      Timer(const Duration(seconds: 3), ()  {
         if (logIn) {
           Get.off(()=> const TogglePages()) ;
         } else {
