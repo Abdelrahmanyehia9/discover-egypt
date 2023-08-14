@@ -10,9 +10,11 @@ class TourGuideModel {
   final int trips;
   final int liked;
   final bool isAvailable ;
+   bool isLiked =true ;
   List<TourGuidePackageModel> packages = [] ;
 
   TourGuideModel( {
+
     required this.isAvailable,
     required this.name,
     required this.imagePath,

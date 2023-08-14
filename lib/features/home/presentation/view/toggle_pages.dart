@@ -1,59 +1,69 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myegypt/constant.dart';
+import 'package:myegypt/features/home/presentation/controller/bookings.dart';
 import 'package:myegypt/features/home/presentation/view/profile_view.dart';
 import 'package:myegypt/features/home/presentation/widget/home_view_body.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '../../data/local_shared_prefrences.dart';
-import 'booking_hotel.dart';
+import 'bookins.dart';
 import 'favourite_view.dart';
 
 class TogglePages extends StatefulWidget {
-  const TogglePages({Key? key}) : super(key: key);
-
+   TogglePages({Key? key, required this.currentIndex}) : super(key: key);
+  int currentIndex ;
   @override
   State<TogglePages> createState() => _TogglePagesState();
 }
 
 class _TogglePagesState extends State<TogglePages> {
-  int currentIndex =  1;
+
 
   List<Widget> pages = [
     const FavouriteViewBody(),
     const HomeViewBody(),
-    const MyBookingBody(),
+
+   const MyBookingBody(),
     const ProfileViewBody(),
   ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: SalomonBottomBar(
+        unselectedItemColor: mainColor,
         duration: const Duration(milliseconds: 700),
         curve: Curves.easeInOut,
-        currentIndex: currentIndex,
+        currentIndex: widget.currentIndex,
         items: [
           SalomonBottomBarItem(
-              icon: const Icon(Icons.favorite, size: 30),
+            activeIcon: const Icon(Icons.favorite, size: 30),
+              icon: const Icon(Icons.favorite_outline, size: 30),
               title: const Text("Favourite")),
           SalomonBottomBarItem(
-              icon: const Icon(Icons.home, size: 30),
+            activeIcon: const Icon(Icons.home, size: 30),
+              icon: const Icon(Icons.home_outlined, size: 30),
               title: const Text("Home")),
           SalomonBottomBarItem(
-              icon: const Icon(Icons.calendar_today, size: 24),
+              activeIcon: const Icon(Icons.airplane_ticket, size: 24),
+              icon: const Icon(Icons.airplane_ticket_outlined, size: 24),
               title: const Text("Booking")),
           SalomonBottomBarItem(
-              icon: const Icon(Icons.person, size: 30),
+            activeIcon: const Icon(Icons.person, size: 30),
+              icon: const Icon(Icons.person_outline, size: 30),
               title: const Text("Profile")),
         ],
         onTap: (index) {
           setState(() {
 
 
-            currentIndex = index;
+            widget.currentIndex = index;
           });
         },
       ),
-      body: pages[currentIndex],
+      body: pages[widget.currentIndex],
     );
   }
 }

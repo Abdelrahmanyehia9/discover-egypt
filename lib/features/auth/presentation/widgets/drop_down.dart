@@ -38,9 +38,9 @@ class _DropDownMenuState extends State<DropDownMenu> {
           () {
             _dropDownValue = val;
             if (_dropDownValue == 'Male') {
-              SignUpUserInfo.instance.isMale = true;
+              AppInfoHelper.instance.isMale = true;
             } else {
-              SignUpUserInfo.instance.isMale = false;
+              AppInfoHelper.instance.isMale = false;
             }
           },
         );

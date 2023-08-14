@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/features/Egypt/presentation/view/discover_all_egypt.dart';
-import 'package:myegypt/features/Egypt/presentation/view/place_details/place_details_view.dart';
+import 'package:myegypt/features/Egypt/presentation/view/place_details_view.dart';
 import 'package:myegypt/features/Egypt/presentation/viewmodel/places_view_model.dart';
 import 'package:myegypt/features/Egypt/presentation/viewmodel/tourists_view_model.dart';
 import '../../../../core/widgets/view_more_bar.dart';

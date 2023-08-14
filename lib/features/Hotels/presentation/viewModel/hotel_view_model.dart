@@ -8,6 +8,7 @@ import 'package:myegypt/features/Hotels/data/model/book_hotel_model.dart';
 import '../../data/model/hotel_model.dart';
 
 class HotelViewModel extends GetxController {
+  bool isLikes = false ;
   ValueNotifier<bool> get loading => _loading;
   final ValueNotifier<bool> _loading = ValueNotifier(false);
   final CollectionReference _hotelModel = FirebaseFirestore.instance.collection("hotel");
@@ -34,11 +35,44 @@ class HotelViewModel extends GetxController {
           placeholder: (context, url) => Image.asset(placeHolder),
         ),
       );
+      _hotelList[i].isLiked = await isFavourite(model: _hotelList[i]);
       _loading.value = false;
     }
     update();
   }
 
+
+  Future<void> addToMyFavourite({required HotelModel model}) async {
+    isLikes = true ;
+    DocumentReference myRef = FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("hotelFavourite")
+        .doc(model.name);
+
+    await myRef.set(model.toJson());
+
+    update() ;
+  }
+  Future<bool> isFavourite({required HotelModel model}) async {
+    bool valid = false;
+    CollectionReference myRef = FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("hotelFavourite");
+    var result = await myRef.get();
+
+    for (int i = 0; i < result.docs.length; i++) {
+      if (result.docs[i].id == model.name) {
+        valid = true;
+        break;
+      } else {
+        valid = false;
+      }
+    }
+
+    return valid;
+  }
 
 
 

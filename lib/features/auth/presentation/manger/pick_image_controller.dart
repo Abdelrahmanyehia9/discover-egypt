@@ -44,7 +44,7 @@ class PickImage extends GetxController {
       Reference storage =  FirebaseStorage.instance.ref('images/${FirebaseAuth.instance.currentUser!.email}/profile.jpg') ;
 
       await storage.putFile(image!);
-      SignUpUserInfo.instance.imagePath = await storage.getDownloadURL();
+      AppInfoHelper.instance.imagePath = await storage.getDownloadURL();
 
 
       update();

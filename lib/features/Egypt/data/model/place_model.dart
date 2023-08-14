@@ -5,9 +5,17 @@ class PlaceModel {
   final String crowded;
   final String space;
   final String languge;
+  final String? temp ;
+  final String? weather ;
+  final List<int>? weatherExpectation ;
+  bool isLiked =true ;
+  List<ThingsToDoModel> thingsTodo = []  ;
 
   PlaceModel(
       {required this.name,
+        this.weather ,
+        this.temp ,
+        this.weatherExpectation ,
       required this.image,
       required this.overview,
       required this.crowded,
@@ -21,7 +29,11 @@ class PlaceModel {
         overview: json['overview'],
         crowded: json['crowded'],
         space: json['space'],
-        languge: json['lang']);
+        languge: json['lang'] ,
+        temp: json['temp'] ,
+      weather: json['weather'] ,
+      weatherExpectation: json['weatherExpectation'] ,
+    );
   }
 
   toJson() {
@@ -32,6 +44,45 @@ class PlaceModel {
       'crowded': crowded,
       'space': space,
       'lang': languge
+    };
+  }
+}
+
+class ThingsToDoModel {
+  final String tittle;
+  final String subTittle;
+  final String imagePath;
+  final bool isRecommended;
+  final String price ;
+  final String? open ;
+
+  ThingsToDoModel({
+     this.open,
+    required this.price,
+    required this.tittle,
+    required this.subTittle,
+    required this.imagePath,
+    required this.isRecommended,
+  });
+
+  factory ThingsToDoModel.fromJson(json) => ThingsToDoModel(
+      tittle: json['tittle'],
+      subTittle: json['subTittle'],
+      imagePath: json['imagePath'],
+      isRecommended: json['isRecommended'],
+    price: json['price'],
+    open: json['open']
+
+
+  );
+
+  toJson() {
+    return {
+
+      'tittle': tittle,
+      'subTittle': subTittle,
+      'imagePath': imagePath,
+      'isRecommended': isRecommended
     };
   }
 }

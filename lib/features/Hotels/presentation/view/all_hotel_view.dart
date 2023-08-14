@@ -16,6 +16,7 @@ class AllHotelView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: GetBuilder<HotelViewModel>(
+            init: HotelViewModel(),
             builder: (controller) => controller.loading.value
                 ? const TourGuideLoading()
                 : Column(

@@ -68,9 +68,23 @@ class PhotoGelleryProfile extends StatelessWidget {
                   crossAxisCount: 3),
               itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: Image.network(
-                    images[index].images,
-                      fit: BoxFit.fill,
+                    child: InkWell(
+                      onTap: (){
+                        Get.dialog(
+                          Center(
+                            child: CachedNetworkImage(
+                              height: dimHeight(context)*0.6,
+                              imageUrl: images[index].images,
+                              placeholder: (context , url)=> Center(child: CircularProgressIndicator(),),
+                            ),
+                          )
+                        );
+                      },
+                      child: CachedNetworkImage(
+                   imageUrl: images[index].images,
+                        fit: BoxFit.fill,
+                        placeholder: (context , url )=> Image.asset(placeHolder),
+                      ),
                     ),
                   )) ;
   }

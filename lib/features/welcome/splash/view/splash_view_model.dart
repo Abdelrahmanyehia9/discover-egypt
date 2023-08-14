@@ -13,7 +13,7 @@ class SplashViewModel extends GetxController{
       final bool logIn = await getValue() ;
       Timer(const Duration(seconds: 3), ()  {
         if (logIn) {
-          Get.off(()=> const TogglePages()) ;
+          Get.off(()=>  TogglePages(currentIndex: 1,)) ;
         } else {
           Get.off( ()=> LoginView())  ;
         }

@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myegypt/constant.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/core/widgets/custom_text.dart';
+import 'package:myegypt/features/Hotels/presentation/view/hotel_view.dart';
+import 'package:myegypt/features/home/presentation/controller/favourite.dart';
 
 import '../../data/model/hotel_model.dart';
+import '../viewModel/hotel_view_model.dart';
 
 class HotelItem extends StatelessWidget {
   const HotelItem({Key? key, required this.model}) : super(key: key);
@@ -67,10 +71,23 @@ class HotelItem extends StatelessWidget {
                       color: mainColor, borderRadius: BorderRadius.circular(4)),
                   width: 30,
                   height: 30,
-                  child: const Icon(
-                    Icons.bookmark,
-                    color: Colors.white,
-                    size: 24,
+                  child: InkWell(
+                    onTap: () {
+                      HotelViewModel().addToMyFavourite(model: model);
+                      Get.snackbar("submitted",
+                          "the Hotel added to your Favourite successfully",
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
+                          snackPosition: SnackPosition.BOTTOM,
+                          snackStyle: SnackStyle.FLOATING ,
+                        duration: const Duration(milliseconds: 800)
+                      );
+                    },
+                    child: const Icon(
+                      Icons.bookmark,
+                      color: Colors.white,
+                      size: 24,
+                    ),
                   ),
                 ),
               ),

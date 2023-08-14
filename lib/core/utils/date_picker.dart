@@ -16,12 +16,12 @@ class _DatePickerState extends State<DatePicker> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime(2010 , 5),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2020));
+        firstDate: DateTime(1920),
+        lastDate: DateTime.now());
     if (picked != null) {
       setState(() {
         selectedDate = picked;
-        SignUpUserInfo.instance.birthDate = DateFormat.yMd().format(selectedDate!);
+        AppInfoHelper.instance.datePicker = DateFormat.yMd().format(selectedDate!);
       });
     }
   }
@@ -34,18 +34,18 @@ class _DatePickerState extends State<DatePicker> {
 
           if (selectedDate == null ){
 
-            return 'please choose your birthdate' ;
+            return 'please choose date' ;
           }else{ return null  ; }
 
         },
         onTap: () {
           _selectDate(context);
-          SignUpUserInfo.instance.birthDate  = selectedDate.toString() ;
+          AppInfoHelper.instance.datePicker  = selectedDate.toString() ;
         },
         readOnly: true,
         decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: 'data of birth',
+            labelText: 'pick date',
             hintText: selectedDate == null
                 ? 'DD/MM/YYYY'
                 : DateFormat.yMd().format(selectedDate!)),

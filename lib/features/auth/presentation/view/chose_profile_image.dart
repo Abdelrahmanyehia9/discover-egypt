@@ -88,7 +88,7 @@ class ChoseProfilePic extends StatelessWidget {
                 onTap: () async {
                   await controller.profileToFireStorage();
                   AuthViewModel().updateInfoSignUp();
-                  Get.to(() => const TogglePages());
+                  Get.to(() =>  TogglePages(currentIndex: 1,));
                 },
               ),
             ],

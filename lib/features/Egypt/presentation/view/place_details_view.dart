@@ -4,20 +4,42 @@ import 'package:get/get.dart';
 import 'package:myegypt/core/utils/dim.dart';
 import 'package:myegypt/features/Egypt/data/model/place_model.dart';
 import 'package:myegypt/features/Egypt/presentation/view/place_details/things_to_do.dart';
-import '../../../../../constant.dart';
-import '../../../../../core/utils/main_app_bar.dart';
-import '../../../../../core/widgets/custom_text.dart';
-import '../../../../auth/presentation/widgets/custom_buttom.dart';
+import 'package:myegypt/features/Egypt/presentation/view/place_details/weather.dart';
+import 'package:myegypt/features/Egypt/presentation/viewmodel/places_view_model.dart';
+import '../../../../constant.dart';
+import '../../../../core/utils/main_app_bar.dart';
+import '../../../../core/widgets/custom_text.dart';
+import '../../../auth/presentation/widgets/custom_buttom.dart';
+import '../../../home/presentation/controller/favourite.dart';
 
-class PlaceDetailsView extends StatelessWidget {
+class PlaceDetailsView extends StatefulWidget {
   const PlaceDetailsView({Key? key, required this.model}) : super(key: key);
   final PlaceModel model;
 
   @override
+  State<PlaceDetailsView> createState() => _PlaceDetailsViewState();
+}
+
+class _PlaceDetailsViewState extends State<PlaceDetailsView> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: mainAppBar(),
+        appBar: mainAppBar(
+          liked: widget.model.isLiked,
+          favOnTap: (){
+            if(widget.model.isLiked == true){
+              FavouriteController().removeFavouritePlace(model: widget.model) ;
+
+            }else{
+              PlacesViewModel().addToMyFavourite(model: widget.model) ;
+            }
+
+            setState(() {
+              widget.model.isLiked = !(widget.model.isLiked) ;
+
+            }
+        );}),
         body: Column(
           children: [
             Stack(
@@ -27,7 +49,7 @@ class PlaceDetailsView extends StatelessWidget {
                   height: dimHeight(context) * .4,
                   width: double.infinity,
                   child: CachedNetworkImage(
-                    imageUrl: model.image,
+                    imageUrl: widget.model.image,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -35,7 +57,7 @@ class PlaceDetailsView extends StatelessWidget {
                     bottom: 8,
                     left: 8,
                     child: CustomText(
-                      text: model.name,
+                      text: widget.model.name,
                       size: 48,
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
@@ -50,50 +72,67 @@ class PlaceDetailsView extends StatelessWidget {
                 icon: Icons.camera,
                 onTap: () {
                   Get.to(() => ThingsToDoView(
-                        model: model,
+                        model: widget.model,
                       ));
                 }),
             pCustomTile(
                 onTap: () {
 
-                  Get.defaultDialog(
+                  showDialog(useSafeArea: false,
+                    context: context, builder: (context)=>AlertDialog(
 
-                    titlePadding: const EdgeInsets.symmetric(vertical: 18),
-                    titleStyle: TextStyle(fontWeight: FontWeight.w900 , color: mainColor),
-                    contentPadding: const EdgeInsets.only(right: 28 , left: 28 , bottom: 28),
-                      title: 'Info about ${model.name}',
-                      content: Column(
+                      actions: [
+                        InkWell(
+                          onTap:(){
+                            Get.back() ;
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomText(text:"cancel" , color: mainColor,size: 18,fontWeight: FontWeight.bold,),
+                          ),
+                        )
+                      ],
 
+                      titlePadding: const EdgeInsets.only(top: 18),
+                      contentPadding: const EdgeInsets.all(12),
+                      title: Center(child: CustomText(text:"info about ${widget.model.name}" , fontWeight: FontWeight.bold,size: 24, color: mainColor,)),
+                    content: SingleChildScrollView(
+                      child: Column(
+mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(
                               height: dimHeight(context) * 0.2,
                               width: double.infinity,
                               child: CachedNetworkImage(
                                 fit: BoxFit.fill,
-                                imageUrl: model.image,
+                                imageUrl: widget.model.image,
                                 placeholder: (context, url) =>
                                     Image.asset(placeHolder),
                               )),
                           const SizedBox(
                             height: 12,
                           ),
-                           CustomText(
+                          CustomText(
                             color: Colors.grey.shade600,
-                              text: model.overview ,
-                           size:  9, fontWeight: FontWeight.bold, ) ,
+                            text: widget.model.overview ,
+                            size:  12, fontWeight: FontWeight.bold, ) ,
                           const SizedBox(height: 12,) ,
-                          pCustomRow(tittle:  'Language :'  ,subTittle: 'AR${model.languge}' )  ,
-                          pCustomRow(tittle:  'crowded :'  ,subTittle: model.crowded ) ,
-                          pCustomRow(tittle:  'Space :'  ,subTittle: model.space )  ,
+                          pCustomRow(tittle:  'Language :'  ,subTittle: 'AR${widget.model.languge}' )  ,
+                          pCustomRow(tittle:  'crowded :'  ,subTittle: widget.model.crowded ) ,
+                          pCustomRow(tittle:  'Space :'  ,subTittle: widget.model.space )  ,
                         ],
-                      ));
+                      ),
+                    )),
+                  );
 
                 },
                 text: "information about city",
                 icon: Icons.info_outline),
-            pCustomTile(text: "Weather", icon: Icons.sunny),
+            pCustomTile(text: "Weather", icon: Icons.sunny , onTap: (){
+              Get.to(()=>WeatherView(model: widget.model)) ;
+            }),
             pCustomTile(text: "top places", icon: Icons.pin_drop_rounded , onTap: (){
-              Get.to(()=>ThingsToDoView(model: model ,view: true))  ;
+              Get.to(()=>ThingsToDoView(model: widget.model ,view: true))  ;
             }),
             const SizedBox(
               height: 16,
@@ -131,7 +170,6 @@ class PlaceDetailsView extends StatelessWidget {
           ),
         ),
       );
-
 
   Widget pCustomRow({required String tittle  , required String subTittle})=>SizedBox(
 

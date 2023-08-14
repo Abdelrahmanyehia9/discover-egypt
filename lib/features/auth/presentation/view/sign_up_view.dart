@@ -95,7 +95,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           email: _emailController.text.trim(),
                           password: _passwordController.text,
                           username: _usernameController.text.trim());
-                      SignUpUserInfo.instance.username = _usernameController.text.trim();
+                      AppInfoHelper.instance.username = _usernameController.text.trim();
 
                     } else {
                       Get.snackbar("password doesn't Match",

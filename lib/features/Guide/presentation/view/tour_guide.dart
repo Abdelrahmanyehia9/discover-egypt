@@ -14,6 +14,7 @@ class TourGuide extends StatelessWidget {
       init: TourGuideViewModel(),
       builder: (controller) => controller.loading.value
           ? const TourGuideLoading()
+      /// tour guides list
           : ListView.builder(
               itemCount: controller.listOfTour.length,
               clipBehavior: Clip.none,
@@ -23,7 +24,7 @@ class TourGuide extends StatelessWidget {
                         onTap: () {
                           Get.to(
                             () => TourGuideDetails(
-                              mode: controller.listOfTour[index],
+                              model: controller.listOfTour[index],
                             ),
                             transition: Transition.fade,
                             duration: const Duration(milliseconds: 1500),

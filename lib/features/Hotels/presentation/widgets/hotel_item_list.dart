@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/core/function/bookingsFunctions.dart';
 import 'package:myegypt/features/Hotels/data/model/hotel_model.dart';
-import 'package:myegypt/features/Hotels/presentation/book_hotel.dart';
 import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
 import '../../../../constant.dart';
+import '../../../../core/helper/sign_up_data.dart';
 import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text.dart';
 
@@ -102,21 +103,23 @@ class HotelItemList extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 4.0),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  bookHotel(
+                                  BookingsFunctions.bookHotel(
                                       globalKey: globalKey,
                                       model: model,
                                       onConfirm: () {
                                         if (globalKey.currentState!
                                             .validate()) {
                                           controller.bookHotel(
+                                            pic: model.imagePath,
+                                              price: model.price,
+                                              rate: model.rating.toString(),
                                               hotelName: model.name,
-                                              dateFrom: BookHotelViewModel.range
-                                                  .toString(),
+                                              dateFrom: BookHotelViewModel.range.toString(),
                                               numOfDays:
-                                                  BookHotelViewModel.numOfDays,
-                                              adults: BookHotelViewModel.adults,
+                                              AppInfoHelper.instance.numOfDays,
+                                              adults: AppInfoHelper.instance.adults,
                                               children:
-                                                  BookHotelViewModel.children);
+                                              AppInfoHelper.instance.children);
                                         }
                                       });
                                 },

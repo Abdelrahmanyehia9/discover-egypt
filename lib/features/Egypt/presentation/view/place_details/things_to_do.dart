@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myegypt/features/Egypt/data/model/place_model.dart';
-
 import '../../../../../constant.dart';
 import '../../../../../core/utils/dim.dart';
 import '../../../../../core/widgets/custom_text.dart';
@@ -15,35 +13,39 @@ class ThingsToDoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-          child: ListView.builder(
-              itemCount: 12,
-              itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: thingsToDoItem(
-                        img: model.image,
-                        context: context,
-                        overView:
-                            'gjdfngjdfgdffvnvd nfdgdfgjdfg gdfkgjkdfgjdf mgfdkjgkdfg ngkdfjgkdfg gdfkgjdfkg jgdfkgjdfk gjdfjgdf ngjdfghjdfghdf gjdfkgjdfkgjdf gjnfdkgjdfk ',
-                        tripname: 'dahab trip '),
-                  ))),
-    ));
+      appBar: AppBar(),
+        body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+            child: ListView.builder(
+                itemCount: model.thingsTodo.length,
+                itemBuilder: (context, index) => Stack(
+                  children: [
+                    Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: thingsToDoItem(
+                              model: model.thingsTodo[index] ,
+                              context: context
+                          )
+                        ),
+                  model.thingsTodo[index].isRecommended == true ?  Positioned(
+                      left: dimWidth(context)*0.01,top: dimHeight(context)*0.006,
+                      child: SizedBox(height: dimHeight(context)*0.2,width: dimWidth(context)*0.27,
+                          child: Image.asset("assets/images/reco.png" , fit: BoxFit.fill,)),
+                    ):const SizedBox()
+
+                  ],
+                ))));
   }
 
-  Widget thingsToDoItem(
-          {required String img,
-          required BuildContext context,
-          required String overView,
-          required tripname}) =>
+  Widget thingsToDoItem({required ThingsToDoModel model ,required BuildContext context}
+          ) =>
       Card(
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 28),
           child: Column(children: [
             CustomText(
-              text: tripname,
+              text: model.tittle,
               size: 24,
               fontWeight: FontWeight.bold,
               color: mainColor,
@@ -54,55 +56,58 @@ class ThingsToDoView extends StatelessWidget {
             SizedBox(
                 height: dimHeight(context) * 0.3,
                 width: double.infinity,
-                child: CachedNetworkImage(
+                child: Image.network(
                   fit: BoxFit.fill,
-                  imageUrl: img,
-                  placeholder: (context, url) => Image.asset(placeHolder),
+                   model.imagePath
                 )),
             const SizedBox(
               height: 12,
             ),
-            Text(
-              overView,
+            view == null ? Text(
+              model.subTittle,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade600,
               ),
-            ),
+            ) :const SizedBox(),
             view != null
                 ? Column(children: [
                     const SizedBox(
                       height: 12,
                     ),
                     Row(
-                      children: const [
-                        SizedBox(
+                      children:  [
+                        const SizedBox(
                             width: 64,
                             child: CustomText(
                               text: "Available",
                               fontWeight: FontWeight.bold,
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 12,
                         ),
-                        CustomText(text: "5:00 am to 12:00 pm")
+                        CustomText(text: model.open?? "24 hours")
                       ],
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Row(
-                      children: const [
-                        SizedBox(
+                      children: [
+                        const SizedBox(
                             width: 64,
                             child: CustomText(
-                              text: "price",
+                              text: "Price",
                               fontWeight: FontWeight.bold,
                             )),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        CustomText(text: "75 \$")
+                       const SizedBox(width: 12,) ,
+                        model.price.contains("hours")?CustomText(
+                          text: model.price  ,
+                          fontWeight: FontWeight.bold,
+                        ):
+                        CustomText(
+                          text: "${model.price}\$"  ,
+                          fontWeight: FontWeight.bold,),
                       ],
                     )
                   ])

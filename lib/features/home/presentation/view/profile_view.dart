@@ -20,6 +20,7 @@ import '../widget/profile_view.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserInfoController>(
@@ -57,6 +58,10 @@ class ProfileViewBody extends StatelessWidget {
                               });
                             },
                             child: const Text("Add new Photo"),
+                          ),
+                          PopupMenuItem(
+                            onTap: () {},
+                            child: const Text("Add New Album"),
                           ),
                         ];
                       },
@@ -130,13 +135,8 @@ class ProfileViewBody extends StatelessWidget {
                           ),
                         ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          addNewPhoto(PickImage());
-                        },
-                        child: const SizedBox(
-                          height: 24,
-                        ),
+                      const SizedBox(
+                        height: 24,
                       ),
                       ButtonsTabBar(
                         labelStyle: const TextStyle(color: Colors.white),
@@ -144,9 +144,7 @@ class ProfileViewBody extends StatelessWidget {
                             horizontal: dimWidth(context) * 0.148),
                         radius: 0,
                         tabs: const [
-                          Tab(
-                              icon: Icon(Icons.photo_outlined),
-                              text: "photo"),
+                          Tab(icon: Icon(Icons.photo_outlined), text: "photo"),
                           Tab(
                               icon: Icon(Icons.photo_album_outlined),
                               text: "album"),
@@ -157,14 +155,37 @@ class ProfileViewBody extends StatelessWidget {
                       ),
                       Expanded(
                         child: TabBarView(children: [
-
-                             PhotoGelleryProfile(
-
-                              images: controller.imageList),
-
-                          const Center(
-                            child: Text('album'),
-                          )
+                          PhotoGelleryProfile(images: controller.imageList),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  width: dimWidth(context) * 0.1,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      color: mainColor,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  )),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              CustomText(
+                                text: "click here to Create your first Album",
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade800,
+                              ),
+                              CustomText(
+                                text:
+                                    "Egypt is a country of charm and beauty.\n Souvenir photos should be taken and kept here",
+                                align: TextAlign.center,
+                                size: 14,
+                                color: Colors.grey.shade400,
+                              )
+                            ],
+                          ),
                         ]),
                       )
                     ],
@@ -200,16 +221,34 @@ class ProfileViewBody extends StatelessWidget {
         content: Column(
           children: [
             InkWell(
-                onTap: () async{
+                onTap: () async {
                   await controller.uploadFromMyDevice(
-                      imgSource: ImageSource.camera,
-                      );
-
-                  Get.off(()=>ProfileView(controller: controller ,));
-
+                    imgSource: ImageSource.camera,
+                  );
+                  if (controller.image != null) {
+                    Get.off(() => ProfileView(
+                          controller: controller,
+                        ));
+                  } else {
+                    Get.back();
+                  }
                 },
                 child: kPicContainer(image: "assets/images/Camera.png")),
-            kPicContainer(image: "assets/images/Gallery.png")
+            InkWell(
+                onTap: () async {
+                  await controller.uploadFromMyDevice(
+                    imgSource: ImageSource.gallery,
+                  );
+
+                  if (controller.image != null) {
+                    Get.off(() => ProfileView(
+                          controller: controller,
+                        ));
+                  } else {
+                    Get.back();
+                  }
+                },
+                child: kPicContainer(image: "assets/images/Gallery.png"))
           ],
         ));
   }

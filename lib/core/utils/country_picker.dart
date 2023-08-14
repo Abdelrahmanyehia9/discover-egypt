@@ -19,7 +19,7 @@ class _CountryPickerState extends State<CountryPicker> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (data){
-        if (SignUpUserInfo.instance.country == null){
+        if (AppInfoHelper.instance.country == null){
           return "please chose country";
         }else {
           return null;
@@ -33,10 +33,11 @@ class _CountryPickerState extends State<CountryPicker> {
           hintText: country == null ? "chose your country" : country!.name
       ),
       onTap: (){
-        showCountryPicker(context: context, onSelect: (value){
+        showCountryPicker(
+            context: context, onSelect: (value){
           setState(() {
             country = value ;
-            SignUpUserInfo.instance.country = country!.name ;
+            AppInfoHelper.instance.country = country!.name ;
           });
 
         }) ;

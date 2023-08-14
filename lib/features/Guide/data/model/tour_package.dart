@@ -3,7 +3,7 @@ class TourGuidePackageModel {
   final String tittle;
   final String subTittle;
   final String price;
-  final List<String> images;
+  final List<dynamic> images;
   final List<String>? opening;
 
   TourGuidePackageModel({
@@ -19,7 +19,8 @@ class TourGuidePackageModel {
       tittle: json['tittle'],
       subTittle: json['subTittle'],
       price: json['price'],
-      images: json['images']);
+      images: json['images']
+  );
 
 toJson(){
 

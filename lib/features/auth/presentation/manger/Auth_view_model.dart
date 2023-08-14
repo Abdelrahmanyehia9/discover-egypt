@@ -40,7 +40,7 @@ class AuthViewModel extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       preferences.setBool(isLogin, true);
-      Get.off(() => const TogglePages());
+      Get.off(() =>  TogglePages(currentIndex: 1,));
     } catch (e) {
       if (e is FirebaseAuthException) {
         _errorMessage = e.message!;
@@ -76,20 +76,20 @@ class AuthViewModel extends GetxController {
 
   void updateInfoSignUp() {
     signup.doc(_auth.currentUser!.email).update({
-      'country': SignUpUserInfo.instance.country,
-      'birthDate': SignUpUserInfo.instance.birthDate,
-      'isMale': SignUpUserInfo.instance.isMale ?? true,
-      'imagePath': SignUpUserInfo.instance.imagePath
+      'country': AppInfoHelper.instance.country,
+      'birthDate': AppInfoHelper.instance.datePicker,
+      'isMale': AppInfoHelper.instance.isMale ?? true,
+      'imagePath': AppInfoHelper.instance.imagePath
     });
 
-    if (SignUpUserInfo.instance.country != 'Egypt') {
+    if (AppInfoHelper.instance.country != 'Egypt') {
       TouristsViewModel().addTourists(
-        imagePath: SignUpUserInfo.instance.imagePath ?? "",
-        country: SignUpUserInfo.instance.country ?? "Egypt",
-        birthDate: SignUpUserInfo.instance.birthDate ?? "0/0/000",
-        mobile: SignUpUserInfo.instance.mobile ?? "",
-        userName: SignUpUserInfo.instance.username ?? 'Pharaoh',
-        isMale: SignUpUserInfo.instance.isMale ?? true,
+        imagePath: AppInfoHelper.instance.imagePath ?? "",
+        country: AppInfoHelper.instance.country ?? "Egypt",
+        birthDate: AppInfoHelper.instance.datePicker ?? "0/0/000",
+        mobile: AppInfoHelper.instance.mobile ?? "",
+        userName: AppInfoHelper.instance.username ?? 'Pharaoh',
+        isMale: AppInfoHelper.instance.isMale ?? true,
       );
     }
   }

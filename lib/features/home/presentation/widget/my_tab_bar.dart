@@ -21,8 +21,8 @@ class MyButtonTabBar extends StatelessWidget {
               backgroundColor: mainColor,
               labelStyle: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
-              unselectedLabelStyle:
-                  TextStyle(color: mainColor, fontWeight: FontWeight.bold),
+              unselectedLabelStyle: const TextStyle(
+                  color: mainColor, fontWeight: FontWeight.bold),
               radius: 100,
               tabs: const [
                 Tab(icon: Icon(Icons.place), text: "Place"),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myegypt/core/utils/material_color.dart';
+import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
+import 'package:myegypt/features/Hotels/presentation/viewModel/hotel_view_model.dart';
+
+import '../../../../core/helper/sign_up_data.dart';
 
 class RangeTimePicker extends StatefulWidget {
   const RangeTimePicker({Key? key, required this.globalKey}) : super(key: key);
@@ -32,7 +36,9 @@ class _RangeTimePickerState extends State<RangeTimePicker> {
     if (picked != null) {
       setState(() {
         selectedDate = picked;
-        print(selectedDate.toString());
+        BookHotelViewModel.range = selectedDate!.start ;
+        AppInfoHelper.instance.numOfDays = selectedDate!.end.difference(selectedDate!.start).inHours ~/ 24 ;
+         print(selectedDate.toString());
       });
     }
   }

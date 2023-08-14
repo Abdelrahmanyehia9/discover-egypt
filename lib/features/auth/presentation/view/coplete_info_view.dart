@@ -87,7 +87,7 @@ class CompleteInfoBody extends StatelessWidget {
                 color: mainColor,
                 onTap: () {
                   if(global.currentState!.validate()){
-                    SignUpUserInfo.instance.mobile =_mobileController.text.trim() ;
+                    AppInfoHelper.instance.mobile =_mobileController.text.trim() ;
                     Get.to(()=> const ChoseProfilePic()) ;
                   }
                   //

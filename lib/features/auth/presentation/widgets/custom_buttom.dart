@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myegypt/constant.dart';
 import '../../../../../core/utils/dim.dart';
 
 class CustomButton extends StatelessWidget {
@@ -13,6 +14,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
+          border: color == null ? Border.all(color: mainColor , width: 2): null,
           color: color ?? Colors.white  ,
           borderRadius: BorderRadius.circular(16),
         ),
@@ -22,7 +24,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.w900 , color: Colors.white),
+          style:  TextStyle(fontWeight: FontWeight.w900 , color: color== null ?mainColor : Colors.white),
         ),
       ),
     );

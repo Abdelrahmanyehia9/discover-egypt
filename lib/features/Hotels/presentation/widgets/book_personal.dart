@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:myegypt/features/Hotels/presentation/viewModel/book_hotel_view_model.dart';
 
 import '../../../../constant.dart';
+import '../../../../core/helper/sign_up_data.dart';
 import '../../../../core/widgets/custom_text.dart';
 
 class BookPersonHotel extends StatefulWidget {
@@ -35,17 +36,17 @@ class _BookPersonHotelState extends State<BookPersonHotel> {
                 onTap: () {
                   setState(() {
                     if (widget.text == "Adults") {
-                      BookHotelViewModel.adults++;
+                      AppInfoHelper.instance.adults++;
                     } else {
-                      BookHotelViewModel.children++;
+                      AppInfoHelper.instance.children++;
                     }
                     widget.num++;
                   });
                 },
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 18,
                   backgroundColor: mainColor,
-                  child: const Icon(
+                  child: Icon(
                     Icons.add,
                     size: 16,
                     color: Colors.white,
@@ -64,19 +65,19 @@ class _BookPersonHotelState extends State<BookPersonHotel> {
                   if (widget.num != 1 && widget.text == "Adults") {
                     setState(() {
                       widget.num--;
-                      BookHotelViewModel.adults--;
+                      AppInfoHelper.instance.adults--;
                     });
                   } else if (widget.num != 0 && widget.text != "Adults") {
                     setState(() {
                       widget.num--;
-                      BookHotelViewModel.children--;
+                      AppInfoHelper.instance.children--;
                     });
                   }
                 },
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 18,
                   backgroundColor: mainColor,
-                  child: const Icon(
+                  child: Icon(
                     Icons.remove,
                     size: 16,
                     color: Colors.white,

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myegypt/features/home/data/local_shared_prefrences.dart';
 import 'package:myegypt/firebase_options.dart';
+import 'core/helper/binding.dart';
 import 'core/utils/material_color.dart';
+import 'features/Egypt/presentation/view/place_details/weather.dart';
 import 'features/welcome/splash/view/splash_screen.dart';
 
 void main() async {
@@ -24,6 +26,7 @@ class MyEgypt extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(primarySwatch: PrimaryColor.primary),
       debugShowCheckedModeBanner: false,
+      initialBinding: Binding(),
       home: const SplashView(),
     );
   }
