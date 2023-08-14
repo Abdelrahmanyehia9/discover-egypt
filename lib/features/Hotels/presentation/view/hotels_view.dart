@@ -18,6 +18,7 @@ class HotelsView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: GetBuilder<HotelViewModel>(
         init: HotelViewModel(),
+        autoRemove: false,
         builder: (controller) => controller.loading.value
             ? const PlacesViewLoading()
             : SingleChildScrollView(

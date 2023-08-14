@@ -7,7 +7,7 @@ class PlaceModel {
   final String languge;
   final String? temp ;
   final String? weather ;
-  final List<int>? weatherExpectation ;
+  final List<dynamic>? weatherExpectation ;
   bool isLiked =true ;
   List<ThingsToDoModel> thingsTodo = []  ;
 
@@ -30,8 +30,8 @@ class PlaceModel {
         crowded: json['crowded'],
         space: json['space'],
         languge: json['lang'] ,
-        temp: json['temp'] ,
-      weather: json['weather'] ,
+        temp: json['weather'] ,
+      weather: json['weatherOverview'] ,
       weatherExpectation: json['weatherExpectation'] ,
     );
   }
@@ -43,7 +43,10 @@ class PlaceModel {
       'overview': overview,
       'crowded': crowded,
       'space': space,
-      'lang': languge
+      'lang': languge ,
+      "weather":temp ,
+      "weatherOverview" : weather ,
+      "weatherExpectation":weatherExpectation
     };
   }
 }

@@ -147,6 +147,7 @@ class _HotelViewState extends State<HotelView> {
                       color: mainColor,
                       onTap: () {
                         BookingsFunctions.bookHotel(
+                          context: context,
                             onConfirm: () {
                               if (globalKey.currentState!.validate()) {
                                 BookHotelViewModel().bookHotel(

@@ -44,17 +44,10 @@ class PlacesViewModel extends GetxController {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection("placeFavourite")
         .doc(model.name);
-    CollectionReference ref = FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("placeFavourite")
-        .doc(model.name)
-        .collection("thingsToDo");
+
 
     await myRef.set(model.toJson());
-    for (int i = 0; i < model.thingsTodo.length; i++) {
-      ref.add(model.thingsTodo[i].toJson());
-    }
+
 
     update() ;
   }

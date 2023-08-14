@@ -6,6 +6,7 @@ import 'package:myegypt/features/Egypt/data/model/place_model.dart';
 import 'package:myegypt/features/Egypt/presentation/view/place_details/things_to_do.dart';
 import 'package:myegypt/features/Egypt/presentation/view/place_details/weather.dart';
 import 'package:myegypt/features/Egypt/presentation/viewmodel/places_view_model.dart';
+import 'package:myegypt/features/Guide/presentation/view/tour_guide.dart';
 import '../../../../constant.dart';
 import '../../../../core/utils/main_app_bar.dart';
 import '../../../../core/widgets/custom_text.dart';
@@ -13,8 +14,9 @@ import '../../../auth/presentation/widgets/custom_buttom.dart';
 import '../../../home/presentation/controller/favourite.dart';
 
 class PlaceDetailsView extends StatefulWidget {
-  const PlaceDetailsView({Key? key, required this.model}) : super(key: key);
+  const PlaceDetailsView({Key? key, required this.model, this.view}) : super(key: key);
   final PlaceModel model;
+  final bool? view ;
 
   @override
   State<PlaceDetailsView> createState() => _PlaceDetailsViewState();
@@ -67,14 +69,14 @@ class _PlaceDetailsViewState extends State<PlaceDetailsView> {
             const SizedBox(
               height: 24,
             ),
-            pCustomTile(
+            widget.view == null ?   pCustomTile(
                 text: "things to do",
                 icon: Icons.camera,
                 onTap: () {
                   Get.to(() => ThingsToDoView(
                         model: widget.model,
                       ));
-                }),
+                }) :const SizedBox(),
             pCustomTile(
                 onTap: () {
 
@@ -86,8 +88,8 @@ class _PlaceDetailsViewState extends State<PlaceDetailsView> {
                           onTap:(){
                             Get.back() ;
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: CustomText(text:"cancel" , color: mainColor,size: 18,fontWeight: FontWeight.bold,),
                           ),
                         )
@@ -131,17 +133,22 @@ mainAxisSize: MainAxisSize.min,
             pCustomTile(text: "Weather", icon: Icons.sunny , onTap: (){
               Get.to(()=>WeatherView(model: widget.model)) ;
             }),
-            pCustomTile(text: "top places", icon: Icons.pin_drop_rounded , onTap: (){
+           widget.view == null ? pCustomTile(text: "Prices", icon: Icons.monetization_on , onTap: (){
               Get.to(()=>ThingsToDoView(model: widget.model ,view: true))  ;
-            }),
+            }) : SizedBox(height: dimHeight(context)*0.22,),
             const SizedBox(
               height: 16,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: CustomButton(
-                text: "Book TourGuide",
-                color: mainColor,
+              child: InkWell(
+                onTap: (){
+                  Get.to(()=>const AllTourGuide()) ;
+                },
+                child: CustomButton(
+                  text: "Book TourGuide",
+                  color: mainColor,
+                ),
               ),
             )
           ],

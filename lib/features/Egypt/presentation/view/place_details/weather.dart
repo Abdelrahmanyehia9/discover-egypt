@@ -47,15 +47,15 @@ class WeatherView extends StatelessWidget {
                  ],
                ),
                Row(
-                 children: const [
+                 children:  [
                    CustomText(
-                     text: "22°",
+                     text: "${model.temp}°",
                      color: Colors.white,
                      fontWeight: FontWeight.bold,
                      size: 72,
                    ),
                    CustomText(
-                     text: "sunny",
+                     text: model.weather ?? "",
                      color: Colors.white,
                      size: 36,
                    ),
@@ -98,7 +98,7 @@ class WeatherView extends StatelessWidget {
     return Container(
       width: dimWidth(context) * .8,
       height: dimHeight(context) * .2,
-      padding: EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
       color: Colors.white.withOpacity(0.2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -112,7 +112,7 @@ class WeatherView extends StatelessWidget {
                 size: 18,
                 fontWeight: FontWeight.bold,
               ),
-              CustomText(text: "22°", color: Colors.white),
+              CustomText(text: "${model.temp}°", color: Colors.white),
             ],
           ),
           Row(
@@ -124,7 +124,7 @@ class WeatherView extends StatelessWidget {
                 size: 18,
                 fontWeight: FontWeight.bold,
               ),
-              CustomText(text: "21°", color: Colors.white),
+              CustomText(text: "${model.weatherExpectation![0]}°", color: Colors.white),
             ],
           ),
           Row(
@@ -136,8 +136,8 @@ class WeatherView extends StatelessWidget {
                 size: 18,
                 fontWeight: FontWeight.bold,
               ),
-              const CustomText(
-                text: "21°",
+               CustomText(
+                text: "${model.weatherExpectation![1]}°",
                 color: Colors.white,
               ),
             ],

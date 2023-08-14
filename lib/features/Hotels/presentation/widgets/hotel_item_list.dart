@@ -104,6 +104,7 @@ class HotelItemList extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                   BookingsFunctions.bookHotel(
+                                    context: context,
                                       globalKey: globalKey,
                                       model: model,
                                       onConfirm: () {

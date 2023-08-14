@@ -19,6 +19,7 @@ class PlacesView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: GetBuilder<PlacesViewModel>(
+          autoRemove: false,
           init: PlacesViewModel(),
           builder: (controller) => controller.loading.value
               ? const PlacesViewLoading()

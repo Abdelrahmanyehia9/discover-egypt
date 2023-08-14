@@ -60,7 +60,7 @@ class BookingTourGuideController extends GetxController {
     }
     await ifValid();
     if (valid) {
-      ref.add({
+     await ref.add({
         "packTo": guideName,
         "imgOfPack": imgOfPack,
         "numOfTrips": model.length,
@@ -72,7 +72,7 @@ class BookingTourGuideController extends GetxController {
         "status": null,
         'images': model[0].images
       });
-      ref2.add({
+     await ref2.add({
         "numOfTrips": model.length,
         "trips": trips,
         "dateOfTrips": date,
@@ -100,6 +100,7 @@ class BookingTourGuideController extends GetxController {
       for (int i = 0; i < data.docs.length; i++) {
         if (data.docs[i].get("status") == null) {
           valid = false;
+          break ;
         } else {
           valid = true;
         }
