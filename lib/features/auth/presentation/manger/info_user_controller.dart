@@ -14,7 +14,9 @@ class UserInfoController extends GetxController {
     getUserInfo();
     getUserImages();
   }
-
+  CollectionReference ref = FirebaseFirestore.instance.collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.email)
+      .collection('photos');
 
   Future<void> getUserInfo() async {
     final DocumentReference model = FirebaseFirestore.instance
@@ -29,9 +31,7 @@ class UserInfoController extends GetxController {
   Future<void> getUserImages() async {
     imageList = [];
 
-    CollectionReference ref = FirebaseFirestore.instance.collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection('photos');
+  
     var data = await ref.get();
     for (int i = 0; i < data.docs.length; i ++) {
       imageList.add(ImagesModel.fromJson(data.docs[i].data()));
@@ -42,6 +42,20 @@ class UserInfoController extends GetxController {
     }
     List<ImagesModel> image = List.from(imageList.reversed);
     imageList = image;
+    update();
+  }
+  Future<void>deleteUserImage({required ImagesModel model})async{
+   var data  = await ref.get() ; 
+    for (int i = 0  ; i< data.docs.length ; i++ ){
+      if (data.docs[i].get("TimeOfUpload") == model.dateTime){
+
+        data.docs[i].reference.delete() ;
+        imageList.remove(model) ;
+      }
+
+      
+      
+    }
     update();
   }
 

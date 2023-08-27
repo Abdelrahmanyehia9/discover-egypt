@@ -9,18 +9,25 @@ class TouristsViewModel extends GetxController {
       FirebaseFirestore.instance.collection("tourists");
 
   List<TouristsModel> get tourists => _touristsList;
-  final List<TouristsModel> _touristsList = [];
+   List<TouristsModel> _touristsList = [];
 
   TouristsViewModel() {
     getTourist();
   }
 
   getTourist() async {
+    List<TouristsModel> list = [] ;
     var result = await _tourists.get();
     for (int i = 0; i < result.docs.length; i++) {
       if (result.docs[i].get('image')!= "") {
         _touristsList.add(TouristsModel.fromJson(result.docs[i].data()));
+        _touristsList.sort((a, b) {
+          return DateTime.parse(a.dateComing.toString()).compareTo(
+              DateTime.parse(b.dateComing.toString()));
+        });
       }
+      List<TouristsModel> list = List.from(_touristsList.reversed);
+      _touristsList = list;
     }
     update();
   }

@@ -8,6 +8,7 @@ import 'package:myegypt/features/home/presentation/widget/profile_view.dart';
 
 import '../../../../constant.dart';
 import '../../../../core/utils/dim.dart';
+import '../../../../core/function/Alerts.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../../../auth/data/model/images_model.dart';
 
@@ -19,6 +20,7 @@ class PhotoGelleryProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return images.isEmpty
         ? GetBuilder<PickImage>(
+
       init: PickImage(),
           builder:(controller)=> Center(
               child: Column(
@@ -80,6 +82,9 @@ class PhotoGelleryProfile extends StatelessWidget {
                           )
                         );
                       },
+                      onLongPress: ()async{
+                       Alerts.alertDeletePhoto(model:  images[index]) ;
+                      },
                       child: CachedNetworkImage(
                    imageUrl: images[index].images,
                         fit: BoxFit.fill,
@@ -89,7 +94,7 @@ class PhotoGelleryProfile extends StatelessWidget {
                   )) ;
   }
 
-  Widget kPicContainer({required String image, VoidCallback? onTap}) => Padding(
+  Widget kPicContainer({required String image, VoidCallback? onTap }) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           onTap: onTap,

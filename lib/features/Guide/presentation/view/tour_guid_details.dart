@@ -33,7 +33,7 @@ class _TourGuideDetailsState extends State<TourGuideDetails> {
   Widget build(BuildContext context) {
     return GetBuilder<BookingTourGuideController>(
       autoRemove: true,
-      init: BookingTourGuideController(),
+      init: Get.find<BookingTourGuideController>() ,
       builder: (controller) => Scaffold(
         /// shopping cart and like
         appBar: AppBar(
@@ -165,8 +165,8 @@ class _TourGuideDetailsState extends State<TourGuideDetails> {
                     ),
                     child: const Text("Book Custom Trip")),
                 ElevatedButton(
-                  onPressed: () {
-                     BookingsFunctions.bookTourGuide(
+                  onPressed: () async{
+                      BookingsFunctions.bookTourGuide(
                         context: context, model: controller, tModel: widget.model);
                   },
                   style: ElevatedButton.styleFrom(

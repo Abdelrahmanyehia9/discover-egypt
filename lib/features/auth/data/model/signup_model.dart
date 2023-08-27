@@ -6,13 +6,10 @@ class SignUpModel {
   final String dateOfReges;
   final bool? isMale;
   final String? birthDate;
-  final List<String>? imageList;
-
   final String? imagePath;
 
   SignUpModel(
       {
-        this.imageList,
        this.imagePath,
       this.birthDate,
       required this.userName,

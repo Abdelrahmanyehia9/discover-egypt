@@ -20,7 +20,7 @@ class HotelFeature extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 14,
+            size: 12,
             color: Colors.white,
           ),
           const SizedBox(
@@ -28,7 +28,7 @@ class HotelFeature extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: const TextStyle(color: Colors.white, fontSize: 10),
           )
         ],
       ),

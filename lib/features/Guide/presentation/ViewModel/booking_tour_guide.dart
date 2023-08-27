@@ -51,10 +51,10 @@ class BookingTourGuideController extends GetxController {
       required List<TourGuidePackageModel> model}) async {
     String trips = "";
 
-    CollectionReference ref2 = FirebaseFirestore.instance
-        .collection("touGuides")
-        .doc(guideName)
-        .collection("Bookings");
+    DocumentReference ref2 = FirebaseFirestore.instance
+        .collection("GuideBookings")
+        .doc(FirebaseAuth.instance.currentUser!.email) ;
+
     for (int i = 0; i < model.length; i++) {
       trips += "${model[i].tittle},";
     }
@@ -72,7 +72,7 @@ class BookingTourGuideController extends GetxController {
         "status": null,
         'images': model[0].images
       });
-     await ref2.add({
+     await ref2.set({
         "numOfTrips": model.length,
         "trips": trips,
         "dateOfTrips": date,

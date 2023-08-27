@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/core/utils/dim.dart';
 import '../../constant.dart';
 import '../../features/Guide/data/model/tour_guide_model.dart';
 import '../../features/Guide/presentation/ViewModel/booking_tour_guide.dart';
@@ -62,6 +63,7 @@ class BookingsFunctions {
                               country: AppInfoHelper.instance.country!,
                               price: model.totalPrice.toString(),
                               model: model.tourGuideSet.toList());
+
                         }
                       },
                     ),
@@ -85,6 +87,7 @@ class BookingsFunctions {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
+
               actions: [
                 CustomButton(
                   text: "book",
@@ -115,37 +118,39 @@ class BookingsFunctions {
                 ),
               ),
               content: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(model.name),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    CachedNetworkImage(
-                      width: double.infinity,
-                      height: 150,
-                      fit: BoxFit.fill,
-                      imageUrl: model.imagePath,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const CustomText(text: "choose period"),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    RangeTimePicker(
-                      globalKey: globalKey,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    BookPersonHotel(
-                        text: 'Adults', num: AppInfoHelper.instance.adults),
-                    BookPersonHotel(
-                        text: 'Children', num: AppInfoHelper.instance.children),
-                  ],
+                child: SizedBox(height: dimHeight(context)*.6,width: dimWidth(context),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(model.name),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      CachedNetworkImage(
+                        width: double.infinity,
+                        height: 150,
+                        fit: BoxFit.fill,
+                        imageUrl: model.imagePath,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const CustomText(text: "choose period"),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      RangeTimePicker(
+                        globalKey: globalKey,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      BookPersonHotel(
+                          text: 'Adults', num: AppInfoHelper.instance.adults),
+                      BookPersonHotel(
+                          text: 'Children', num: AppInfoHelper.instance.children),
+                    ],
+                  ),
                 ),
               ),
             ));

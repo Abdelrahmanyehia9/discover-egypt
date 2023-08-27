@@ -59,7 +59,6 @@ class BookingsController extends GetxController {
         completedGuide.add(_bookingGuideList[i]);
       }
 
-      print(upComingGuide?.date ?? "koso");
     }
 
     update();
@@ -77,12 +76,17 @@ class BookingsController extends GetxController {
   }
 
   Future<void> removeGuide() async {
+    final DocumentReference reference = FirebaseFirestore.instance
+        .collection('GuideBookings')
+        .doc(FirebaseAuth.instance.currentUser!.email) ;
+
     var data = await referenceGuide.get();
     for (int i = 0; i < data.docs.length; i++) {
       if (data.docs[i].get("status") == null) {
         data.docs[i].reference.delete();
       }
     }
+    reference.delete() ;
     upComingGuide = null;
     update();
   }

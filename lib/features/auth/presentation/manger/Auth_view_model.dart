@@ -21,6 +21,10 @@ class AuthViewModel extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference signup =
       FirebaseFirestore.instance.collection('users');
+   String oldPass    = "" ;
+   AuthViewModel(){
+     getOldPassword() ;
+   }
 
   void completeInfoSignUp(
       {required String email,
@@ -40,7 +44,9 @@ class AuthViewModel extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       preferences.setBool(isLogin, true);
-      Get.off(() =>  TogglePages(currentIndex: 1,));
+      Get.off(() => TogglePages(
+            currentIndex: 1,
+          ));
     } catch (e) {
       if (e is FirebaseAuthException) {
         _errorMessage = e.message!;
@@ -92,5 +98,18 @@ class AuthViewModel extends GetxController {
         isMale: AppInfoHelper.instance.isMale ?? true,
       );
     }
+  }
+
+  Future<void> getOldPassword() async {
+    var doc = await signup.doc(FirebaseAuth.instance.currentUser!.email).get();
+    oldPass = doc.get("password");
+  }
+  Future<void> updatePassword({required String newPassword}) async{
+    var doc = await signup.doc(FirebaseAuth.instance.currentUser!.email).get();
+    FirebaseAuth.instance.currentUser!.updatePassword(newPassword) ;
+     doc.reference.update({"password" : newPassword}) ;
+
+
+
   }
 }

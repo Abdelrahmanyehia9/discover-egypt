@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:myegypt/features/auth/presentation/view/chose_profile_image.dart';
 import 'package:myegypt/features/auth/presentation/view/login_view.dart';
 import 'package:myegypt/features/home/data/local_shared_prefrences.dart';
 import 'package:myegypt/features/home/presentation/view/toggle_pages.dart';
@@ -15,6 +16,7 @@ import '../../../../core/utils/dim.dart';
 import '../../../../core/widgets/custom_text.dart';
 import '../../../auth/presentation/manger/info_user_controller.dart';
 import '../../../auth/presentation/manger/pick_image_controller.dart';
+import '../../../auth/presentation/widgets/change_password.dart';
 import '../widget/photos_grid_view.dart';
 import '../widget/profile_view.dart';
 
@@ -24,7 +26,7 @@ class ProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserInfoController>(
-      init: UserInfoController(),
+      init: UserInfoController() ,
       builder: (controller) => controller.userModel == null
           ? const Center(
               child: CircularProgressIndicator(),
@@ -252,4 +254,142 @@ class ProfileViewBody extends StatelessWidget {
           ],
         ));
   }
+}
+
+class SettingsView extends StatelessWidget {
+  const SettingsView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<UserInfoController>(
+      init: UserInfoController(),
+      builder: (controller) => controller.userModel == null
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Scaffold(
+              body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        height: dimHeight(context) * 0.23,
+                        child: ListView.builder(
+                            itemCount: controller.imageList.length,
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => Padding(
+                                  padding: const EdgeInsets.all(1.0),
+                                  child: SizedBox(
+                                    height: dimHeight(context) * 0.23,
+                                    width: dimWidth(context) * 0.3,
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          controller.imageList[index].images,
+                                      fit: BoxFit.fill,
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                              child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )),
+                                    ),
+                                  ),
+                                )),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: dimHeight(context) * 0.1,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 75,
+                            child: Center(
+                              child: CircleAvatar(
+                                radius: 72,
+                                backgroundImage: NetworkImage(
+                                    controller.userModel!.imagePath!),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: CustomText(
+                              text: controller.userModel!.userName,
+                              fontWeight: FontWeight.bold,
+                              size: 28,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  myTile(
+                    tapped: (){
+                      Get.to(()=> const ProfileViewBody());
+                    },
+                      tittle: "profile",
+                      icon: Icons.person,
+                      subTittle: "see your profile Info"),
+                  myTile(
+                    tapped: (){
+                      Get.to(()=> ChangePassword()) ;
+                    },
+                      tittle: "Security",
+                      icon: Icons.key,
+                      subTittle: "Change Your Password"),
+                  myTile(
+                      tittle: "Support",
+                      icon: Icons.question_answer_sharp,
+                      subTittle: "Get help"),
+                  myTile(
+                      tittle: "FAQ",
+                      icon: Icons.question_mark,
+                      subTittle: "Learn more about us"),
+                  myTile(
+                      tittle: "Logout",
+                      icon: Icons.logout,
+                      subTittle: ""),
+                  const Padding(
+                    padding: EdgeInsets.all(18.0),
+                    child: Text(
+                      "v 1.0.0",
+                      style:
+                          TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            )),
+    );
+  }
+
+  Widget myTile(
+          {required IconData icon,
+          required String tittle,
+          required String subTittle,
+          VoidCallback? tapped}) =>
+      InkWell(
+        highlightColor: mainColor.withOpacity(0.3),
+        onTap: tapped,
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: mainColor,
+            size: 24,
+          ),
+          title: CustomText(
+            text: tittle,
+            size: 18,
+          ),
+          trailing:  Icon(Icons.arrow_forward , color: Colors.grey.shade700, size: 20,),
+          subtitle: Text(subTittle , style: const TextStyle(fontSize: 12),),
+        ),
+      );
 }

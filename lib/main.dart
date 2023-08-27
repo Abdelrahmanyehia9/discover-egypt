@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myegypt/features/auth/presentation/manger/Auth_view_model.dart';
 import 'package:myegypt/features/home/data/local_shared_prefrences.dart';
 import 'package:myegypt/firebase_options.dart';
 import 'core/helper/binding.dart';
@@ -24,7 +25,8 @@ class MyEgypt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(primarySwatch: PrimaryColor.primary),
+      theme: ThemeData(
+          primarySwatch: PrimaryColor.primary),
       debugShowCheckedModeBanner: false,
       initialBinding: Binding(),
       home: const SplashView(),

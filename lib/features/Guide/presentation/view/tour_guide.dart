@@ -14,7 +14,7 @@ class TourGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TourGuideViewModel>(
-      init: TourGuideViewModel(),
+      init: Get.find<TourGuideViewModel>() ,
       builder: (controller) => controller.loading.value
           ? const TourGuideLoading()
       /// tour guides list
@@ -59,7 +59,7 @@ class AllTourGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TourGuideViewModel>(
-      init: TourGuideViewModel(),
+      init: Get.find<TourGuideViewModel>() ,
       builder:(controller)=> Scaffold(
         appBar: AppBar(title: const Text("Tour Guides"),) ,
         body: controller.loading.value
@@ -80,7 +80,8 @@ class AllTourGuide extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 2.0),
                     child: InkWell(
                       onTap: (){
-                        Get.to(()=>TourGuideDetails(model: controller.listOfTour[index])) ;
+                        Get.to(()=>TourGuideDetails(
+                            model: controller.listOfTour[index])) ;
                       },
                         child: TourGuideItem(model: controller.listOfTour[index])),
                   ) ),

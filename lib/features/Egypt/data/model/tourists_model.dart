@@ -17,7 +17,10 @@ class TouristsModel {
       required this.image});
 
   factory TouristsModel.fromJson(json) {
-    return TouristsModel(name: json["name"], image: json["image"]);
+    return TouristsModel(
+        name: json["name"], image: json["image"] ,
+     dateComing: json['dateComing']
+    );
   }
 
   toJson() {

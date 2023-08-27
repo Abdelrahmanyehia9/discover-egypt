@@ -86,7 +86,7 @@ class UpComingsBookings extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: (){
-                          Get.to(()=>AllTourGuide()) ;
+                          Get.to(()=>const AllTourGuide()) ;
                         },
                         child: Center(
                           child: Container(
@@ -106,6 +106,7 @@ class UpComingsBookings extends StatelessWidget {
                   ),
                 )
               : BookingsComponent.customTileOfBookGuide(
+
                   model: controller.upComingGuide!,
                   onTap: () {
                     controller.removeGuide();

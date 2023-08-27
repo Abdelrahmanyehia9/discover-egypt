@@ -23,9 +23,8 @@ class _TogglePagesState extends State<TogglePages> {
   List<Widget> pages = [
     const FavouriteViewBody(),
     const HomeViewBody(),
-
    const MyBookingBody(),
-    const ProfileViewBody(),
+    const SettingsView(),
   ];
 
 
@@ -51,9 +50,9 @@ class _TogglePagesState extends State<TogglePages> {
               icon: const Icon(Icons.airplane_ticket_outlined, size: 24),
               title: const Text("Booking")),
           SalomonBottomBarItem(
-            activeIcon: const Icon(Icons.person, size: 30),
-              icon: const Icon(Icons.person_outline, size: 30),
-              title: const Text("Profile")),
+            activeIcon: const Icon(Icons.settings, size: 30),
+              icon: const Icon(Icons.settings_outlined, size: 30),
+              title: const Text("Setting")),
         ],
         onTap: (index) {
           setState(() {
